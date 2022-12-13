@@ -157,6 +157,10 @@ public class Animal {
 
     }
 
+    public void eat() {
+        energy += params.energyFromPlant;
+    }
+
     // getters
     public int[] getGenotype() {
         return genotype;

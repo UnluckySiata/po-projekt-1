@@ -55,6 +55,8 @@ public class SimulationEngine implements Runnable {
             a.move(); // brakuje implementacji w mapie
         }
 
+        map.feast();
+
         map.spawnPlants(map.params.plantsPerDay);
 
         if (exportStats) {

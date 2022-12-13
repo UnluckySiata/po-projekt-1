@@ -191,7 +191,8 @@ public abstract class AbstractWorldMap {
         LinkedList<Animal> animalsOnField = fields.get(pos);
         if (animals.size() < 2) return;
 
-        animals.sort((a1, a2) -> a1.getEnergy() > a2.getEnergy() ? 1 : a1.getEnergy() == a2.getEnergy() ? 0 : -1);
+        // descending
+        animals.sort((a1, a2) -> a1.getEnergy() > a2.getEnergy() ? -1 : a1.getEnergy() == a2.getEnergy() ? 0 : 1);
         Animal first = animals.get(0);
         Animal second = animals.get(1);
 
@@ -218,6 +219,53 @@ public abstract class AbstractWorldMap {
                 genotypes.put(genotype, 1);
             }
         }
+    }
+
+    void feast() {
+
+        for (Map.Entry<Vector2d, LinkedList<Animal>> field : fields.entrySet()) {
+            Vector2d pos = field.getKey();
+            LinkedList<Animal> animalsOnField = field.getValue();
+
+            if (plantPresent[pos.x + pos.y * width] && animalsOnField.size() > 0) {
+                plantPresent[pos.x + pos.y * width] = false;
+
+                List<Animal> considered = animalsOnField.stream()
+                    .filter(a -> a.getEnergy() == Collections.max(animalsOnField, (a1, a2) -> a1.getEnergy() > a2.getEnergy() ? -1 :
+                                                                  a1.getEnergy() == a2.getEnergy() ? 0 : 1).getEnergy())
+                    .toList();
+
+                if (considered.size() == 1) {
+                    considered.get(0).eat();
+                    return;
+                }
+
+                considered = considered.stream()
+                    .filter(a -> a.getLifetime() == Collections.max(animalsOnField, (a1, a2) -> a1.getLifetime() > a2.getLifetime() ? -1 :
+                                                                  a1.getLifetime() == a2.getLifetime() ? 0 : 1).getLifetime())
+                    .toList();
+
+                if (considered.size() == 1) {
+                    considered.get(0).eat();
+                    return;
+                }
+
+                considered = considered.stream()
+                    .filter(a -> a.getChildrenNumber() == Collections.max(animalsOnField, (a1, a2) -> a1.getChildrenNumber() > a2.getChildrenNumber() ? -1 :
+                                                                  a1.getChildrenNumber() == a2.getChildrenNumber() ? 0 : 1).getChildrenNumber())
+                    .toList();
+
+                if (considered.size() == 1) {
+                    considered.get(0).eat();
+                } else {
+                    int i = new Random().nextInt(considered.size());
+                    considered.get(i).eat();
+                }
+
+            }
+
+        }
+
     }
 
     void positionChanged(Animal a, Vector2d oldPosition, Vector2d newPosition) {

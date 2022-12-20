@@ -52,7 +52,7 @@ public class SimulationEngine implements Runnable {
         for (Animal a : map.animals) {
             if (suspended) waitForResume();
 
-            a.move(); // brakuje implementacji w mapie
+            a.move();
         }
 
         map.feast();

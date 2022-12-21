@@ -1,3 +1,0 @@
-Map Width,Map Height,World Variant,Initial Plant Number,Energy From Plant,Plants Per Day,Plant Growth Variant,Initial Animal Number,Starting Energy,Energy Needed,Procreation Energy Share,Min Mutations,Max Mutations,Mutation Variant,Genotype Length,Gene Progression Variant
-10,10,earth,5,5,7,equator,2,10,5,0.5,1,15,full_randomness,8,some_madness
-1,1,infernal_portal,2,3,4,toxic_corpses,5,20,5,0.4,2,30,slight_correction,32,full_predestination

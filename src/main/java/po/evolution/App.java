@@ -1,6 +1,7 @@
 package po.evolution;
 
-import gui.formController;
+import gui.FormController;
+import gui.GuiApp;
 import javafx.application.Application;
 import java.util.List;
 
@@ -13,6 +14,6 @@ public class App {
 //        for (SimulationParameters c: configs) {
 //            System.out.println(c.toString());
 //        }
-        Application.launch(formController.class, args);
+        Application.launch(GuiApp.class, args);
     }
 }

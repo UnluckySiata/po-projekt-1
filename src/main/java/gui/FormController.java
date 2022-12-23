@@ -92,4 +92,16 @@ public class FormController {
         return validation(textToValidation, buttonsToValidation);
     }
 
+    public Button getStopButton() {
+        return stop;
+    }
+
+
+    public int getHeight() {
+        return Integer.parseInt(userConfig.get(0));
+    }
+    public int getWidth() {
+        return Integer.parseInt(userConfig.get(1));
+    }
+
 }

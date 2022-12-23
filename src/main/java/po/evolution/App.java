@@ -11,9 +11,9 @@ public class App {
         List<SimulationParameters> configs = ConfigurationParser.parse("config.csv");
 
 
-//        for (SimulationParameters c: configs) {
-//            System.out.println(c.toString());
-//        }
+        for (SimulationParameters c: configs) {
+            System.out.println(c.toString());
+        }
         Application.launch(GuiApp.class, args);
     }
 }

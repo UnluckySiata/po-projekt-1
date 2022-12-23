@@ -10,12 +10,7 @@ import javafx.fxml.FXMLLoader;
 import java.util.Objects;
 
 public class GuiApp extends Application{
-
-    private final GridPane gridPaneScreen = new GridPane();
-    private final GridPane gridPaneMap = new GridPane();
-
-
-
+    private SimulationVisualisation simulationVisualisation = new SimulationVisualisation();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -29,6 +24,15 @@ public class GuiApp extends Application{
         FormController formController = root.getController();
         formController.getStartButton().setOnAction(e -> {
             formController.getUserConfig();
+
+        });
+        formController.getStopButton().setOnAction(e -> {
+            Stage stage = new Stage();
+            try {
+                simulationVisualisation.init(stage);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
         });
     }
 

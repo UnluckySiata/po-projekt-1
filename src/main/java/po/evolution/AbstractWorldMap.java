@@ -272,4 +272,12 @@ public abstract class AbstractWorldMap {
         fields.get(oldPosition).remove(a);
         fields.get(newPosition).push(a);
     }
+
+    public boolean[] getPlants() {
+        return plantPresent;
+    }
+
+    public LinkedList<Animal> getAnimals() {
+        return animals;
+    }
 }

@@ -1,5 +1,9 @@
 package po.evolution;
 
+import javafx.scene.image.Image;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.util.Random;
 
 public class Animal {
@@ -201,6 +205,9 @@ public class Animal {
     public int getDeathDay() {
         if (alive) return 0;
         return lastDay;
+    }
+    public Image getImage() throws FileNotFoundException {
+        return new Image(new FileInputStream("src/main/resources/animal.png"));
     }
 
 }

@@ -1,55 +1,7 @@
 package po.evolution;
 
-import java.security.InvalidParameterException;
+import java.util.List;
 import com.opencsv.bean.CsvBindByName;
-
-enum WorldVariant {
-    EARTH, INFERNAL_PORTAL;
-
-    static WorldVariant parse(String arg) throws InvalidParameterException {
-        return switch(String.join("", arg).toLowerCase()) {
-            case "earth", "ziemia", "kulaziemska" -> EARTH;
-            case "infernalportal", "piekielnyportal" -> INFERNAL_PORTAL;
-            default -> throw new InvalidParameterException("Can't match parmeter to enum variant");
-        };
-    }
-}
-
-enum MutationVariant {
-    FULL_RANDOMNESS, SLIGHT_CORRECTION;
-
-    static MutationVariant parse(String arg) throws InvalidParameterException {
-        return switch(String.join("", arg).toLowerCase()) {
-        case "fullrandomness", "pełnalosowość" -> FULL_RANDOMNESS;
-            case "slightcorrection", "lekkakorekta" -> SLIGHT_CORRECTION;
-            default -> throw new InvalidParameterException("Can't match parmeter to enum variant");
-        };
-    }
-}
-
-enum PlantGrowthVariant {
-    EQUATOR, TOXIC_CORPSES;
-
-    static PlantGrowthVariant parse(String arg) throws InvalidParameterException {
-        return switch(String.join("", arg).toLowerCase()) {
-            case "equator", "zalesionerówniki", "równik" -> EQUATOR;
-            case "toxiccorpses", "toksycznetrupy" -> TOXIC_CORPSES;
-            default -> throw new InvalidParameterException("Can't match parmeter to enum variant");
-        };
-    }
-}
-
-enum GeneProgressionVariant {
-    FULL_PREDESTINATION, SOME_MADNESS;
-
-    static GeneProgressionVariant parse(String arg) {
-        return switch(String.join("", arg).toLowerCase()) {
-            case "fullpredestination" -> FULL_PREDESTINATION;
-            case "somemadness" -> SOME_MADNESS;
-            default -> throw new InvalidParameterException();
-        };
-    }
-}
 
 public class SimulationParameters {
     @CsvBindByName(column = "Map Width", required = true)

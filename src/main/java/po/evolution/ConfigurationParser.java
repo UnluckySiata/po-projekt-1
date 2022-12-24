@@ -34,7 +34,7 @@ public class ConfigurationParser {
 
     public static SimulationParameters writeAndGet(List<String> userConfig, String fileName) {
         try {
-            FileWriter fileWriter = new FileWriter(fileName);
+            FileWriter fileWriter = new FileWriter("src/main/resources/" + fileName);
             CSVWriter writer = new CSVWriter(fileWriter);
             writer.writeNext(userConfig.toArray(new String[0]));
             writer.close();

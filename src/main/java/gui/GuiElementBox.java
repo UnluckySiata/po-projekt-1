@@ -29,7 +29,7 @@ public class GuiElementBox {
     //konstruktor dla trawy
     public GuiElementBox(double width, double height) throws FileNotFoundException {
         try {
-            image = new Image(new FileInputStream("C:\\Users\\rafal\\OneDrive\\Pulpit\\java_project_z_siatą\\po-projekt-1\\src\\main\\resources\\grass.png"));
+            image = new Image(new FileInputStream("src/main/resources/grass.png"));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }

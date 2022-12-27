@@ -7,17 +7,17 @@ public class SimulationEngine implements Runnable {
     private boolean exportStats = false;
     private String statsFileName = "";
 
-    public SimulationEngine(String name, AbstractWorldMap map) {
+    public SimulationEngine(AbstractWorldMap map) {
         this.map = map;
-        t = new Thread(this, name);
+        t = new Thread(this);
         suspended = false;
     }
 
-    public SimulationEngine(String name, AbstractWorldMap map, String statsFileName) {
+    public SimulationEngine(AbstractWorldMap map, String statsFileName) {
         this.map = map;
         this.exportStats = true;
         this.statsFileName = statsFileName;
-        t = new Thread(this, name);
+        t = new Thread(this);
         suspended = false;
         map.stats.prepareAndCreateCSV(statsFileName);
     }

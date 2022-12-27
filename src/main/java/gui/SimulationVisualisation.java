@@ -9,7 +9,6 @@ import javafx.stage.Stage;
 import po.evolution.*;
 
 import java.util.List;
-import com.opencsv.bean.CsvBindByName;
 
 public class SimulationVisualisation extends Application{
 
@@ -17,8 +16,8 @@ public class SimulationVisualisation extends Application{
     private WorldVariant earth = WorldVariant.EARTH;
     private AbstractWorldMap map;
     public void init(Stage primaryStage) throws Exception {
-        map = earth == WorldVariant.EARTH ? new Earth(10, 10, configs.get(0)) : new InfernalPortal(10, 10, configs.get(0));
-        SimulationEngine simulationEngine = new SimulationEngine("essa", this.map);
+        map = earth == WorldVariant.EARTH ? new Earth(configs.get(0)) : new InfernalPortal(configs.get(0));
+        SimulationEngine simulationEngine = new SimulationEngine(this.map);
         start(primaryStage);
 
         FXMLLoader root = new FXMLLoader(getClass().getResource("/Simulation.fxml"));

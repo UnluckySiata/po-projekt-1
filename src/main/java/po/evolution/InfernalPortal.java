@@ -4,8 +4,8 @@ import java.util.Random;
 
 public class InfernalPortal extends AbstractWorldMap {
 
-    public InfernalPortal(int height, int width, SimulationParameters params) {
-        super(height, width, params);
+    public InfernalPortal(SimulationParameters params) {
+        super(params);
     }
 
     public Vector2d nextPosition(Vector2d wantedPosition) {

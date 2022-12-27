@@ -1,5 +1,6 @@
 package po.evolution;
 
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -23,13 +24,16 @@ public abstract class AbstractWorldMap {
     protected int[] domimantGenotype = new int[0];
     public Statistics stats;
 
-    public AbstractWorldMap(int height, int width, SimulationParameters params) {
-        this.height = height;
-        this.width = width;
-        this.n = width * height;
+    public AbstractWorldMap(SimulationParameters params) {
+        height = params.mapHeight;
+        width = params.mapWidth;
+        n = width * height;
         this.params = params;
         animalsNum = params.initialAnimalNum;
         freeFields = n;
+        plantPresent = new boolean[n];
+        animalsDied = new int[n];
+        stats = new Statistics(animalsNum, plants, freeFields, (double) params.startingEnergy);
 
         for (int x = 0; x < width; ++x) {
             for (int y = 0; y < height; ++y) {
@@ -41,7 +45,6 @@ public abstract class AbstractWorldMap {
         spawnPlants(params.initialPlantNum);
 
         currGenotypeMax = Collections.max(genotypes.values());
-        stats = new Statistics(animalsNum, plants, freeFields, (double) params.startingEnergy);
 
         domimantGenotype = calculateDominantGenotype();
         stats.acquireDominantGenotype(domimantGenotype);
@@ -98,7 +101,7 @@ public abstract class AbstractWorldMap {
                 int middle = height / 2 + 1;
                 int offset = lineHeight / 2;
 
-                result = new int[lineHeight];
+                result = new int[lineHeight * width];
                 List<Integer> rowIndexes = IntStream.range(middle - offset, middle - offset + lineHeight).boxed().toList();
                 List<Integer> columns = IntStream.range(0, width).boxed().toList();
 
@@ -117,36 +120,32 @@ public abstract class AbstractWorldMap {
 
     void spawnPlants(int quantity) {
         if (plants == n) return;
-        boolean canPlace, inPrefered, check = true;
+        boolean inPrefered, check = true;
         int[] perm = generateFavoredPermutation();
 
         for (int p = 0; p < quantity; ++p) {
-            canPlace = false;
             inPrefered = Math.random() < 0.8;
 
             if (inPrefered && check) {
 
-                for (int i: perm) {
-                    if (!plantPresent[i]) {
-                        canPlace = true;
-                        break;
-                    }
-                }
+                int[] free = Arrays.stream(perm)
+                    .filter(x -> !plantPresent[x])
+                    .toArray();
 
-                if (canPlace) {
-                    int i = new Random().ints(1, 0, perm.length)
-                        .filter(x -> !plantPresent[x])
-                        .findFirst()
-                        .getAsInt();
-                    plantPresent[perm[i]] = true;
+                if (free.length > 0) {
+                    int i = new Random().nextInt(free.length);
+                    plantPresent[free[i]] = true;
                 } else check = false;
 
-            } else if (!inPrefered || !check) {
-                int i = new Random().ints(1, 0, n)
+            }
+            if (!inPrefered || !check) {
+                int[] free = IntStream.range(0, n)
                     .filter(x -> !plantPresent[x])
-                    .findFirst()
-                    .getAsInt();
-                plantPresent[i] = true;
+                    .toArray();
+
+                if (free.length == 0) return;
+                int i = new Random().nextInt(free.length);
+                plantPresent[free[i]] = true;
 
             }
 

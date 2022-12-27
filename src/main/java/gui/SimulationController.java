@@ -71,7 +71,6 @@ public class SimulationController {
                 GuiElementBox grass = new GuiElementBox(this.imgWidht, this.imgWidht);
                 x = i % fieldsNumY;
                 y = (int)(Math.floor(i/fieldsNumX));
-                System.out.println(x+' '+ y);
                 grid.add(grass.vbox, x, y);
             }
         }
@@ -84,7 +83,6 @@ public class SimulationController {
             GuiElementBox animal = new GuiElementBox(animalOnField, this.imgWidht, this.imgWidht);
             x = animalOnField.getPosition().x;
             y = animalOnField.getPosition().y;
-            System.out.println(x+' '+ y + ' ' + "animal");
             grid.add(animal.vbox, x, y);
         }
 

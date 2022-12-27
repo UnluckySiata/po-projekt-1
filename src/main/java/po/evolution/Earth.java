@@ -2,8 +2,8 @@ package po.evolution;
 
 public class Earth extends AbstractWorldMap {
 
-    public Earth(int width, int height, SimulationParameters params) {
-        super(height, width, params);
+    public Earth(SimulationParameters params) {
+        super(params);
     }
 
     public Vector2d nextPosition(Vector2d wantedPosition) {

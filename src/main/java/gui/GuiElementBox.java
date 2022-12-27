@@ -23,12 +23,13 @@ public class GuiElementBox {
             throw new RuntimeException(e);
         }
         this.setImage(image, width, height);
+
     }
 
     //konstruktor dla trawy
     public GuiElementBox(double width, double height) throws FileNotFoundException {
         try {
-            image = new Image(new FileInputStream("src/main/resources/grass.png"));
+            image = new Image(new FileInputStream("C:\\Users\\rafal\\OneDrive\\Pulpit\\java_project_z_siatą\\po-projekt-1\\src\\main\\resources\\grass.png"));
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);
         }
@@ -39,6 +40,7 @@ public class GuiElementBox {
         ImageView imageView = new ImageView(image);
         imageView.setFitWidth(width);
         imageView.setFitHeight(height);
+        vbox.getChildren().addAll(imageView);
         vbox.setAlignment(Pos.CENTER);
     }
 }

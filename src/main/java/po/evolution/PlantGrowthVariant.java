@@ -7,8 +7,8 @@ public enum PlantGrowthVariant {
 
     static PlantGrowthVariant parse(String arg) throws InvalidParameterException {
         return switch(String.join("", arg).toLowerCase()) {
-            case "equator", "zalesionerówniki", "równik" -> EQUATOR;
-            case "toxiccorpses", "toksycznetrupy" -> TOXIC_CORPSES;
+            case "true" -> EQUATOR;
+            case "false" -> TOXIC_CORPSES;
             default -> throw new InvalidParameterException("Can't match parmeter to enum variant");
         };
     }

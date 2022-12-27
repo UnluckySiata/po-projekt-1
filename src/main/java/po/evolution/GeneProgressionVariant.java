@@ -7,8 +7,8 @@ public enum GeneProgressionVariant {
 
     static GeneProgressionVariant parse(String arg) {
         return switch(String.join("", arg).toLowerCase()) {
-            case "fullpredestination" -> FULL_PREDESTINATION;
-            case "somemadness" -> SOME_MADNESS;
+            case "true" -> FULL_PREDESTINATION;
+            case "false" -> SOME_MADNESS;
             default -> throw new InvalidParameterException();
         };
     }

@@ -40,7 +40,7 @@ public class SimulationController {
     }
     public void drawGrid() throws FileNotFoundException {
 
-        System.out.println(mapBoxWidth +"|||||"+ mapBoxHeight);
+//        System.out.println(mapBoxWidth +"|||||"+ mapBoxHeight);
         int col = 0, row = 0, maxC = fieldsNumY, maxR = fieldsNumX;
         this.fieldDim = (mapBoxWidth/fieldsNumX);
 
@@ -54,15 +54,12 @@ public class SimulationController {
         for (int i = 0; i <= maxR + 1; ++i) {
             grid.getRowConstraints().add(rowC);
         }
-//        addElements(); //to wyjątek rzuca zrób try catcha
+        addElements(); //to wyjątek rzuca zrób try catcha
 
         mapBox.getChildren().add(grid);
         grid.setGridLinesVisible(true);
     }
 
-    public void prepareTemplate() {
-
-    }
 
     public void addElements() throws FileNotFoundException {
         calculateImgDim();
@@ -74,6 +71,7 @@ public class SimulationController {
                 GuiElementBox grass = new GuiElementBox(this.imgWidht, this.imgWidht);
                 x = i % fieldsNumY;
                 y = (int)(Math.floor(i/fieldsNumX));
+                System.out.println(x+' '+ y);
                 grid.add(grass.vbox, x, y);
             }
         }
@@ -86,6 +84,7 @@ public class SimulationController {
             GuiElementBox animal = new GuiElementBox(animalOnField, this.imgWidht, this.imgWidht);
             x = animalOnField.getPosition().x;
             y = animalOnField.getPosition().y;
+            System.out.println(x+' '+ y + ' ' + "animal");
             grid.add(animal.vbox, x, y);
         }
 

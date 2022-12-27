@@ -7,8 +7,8 @@ public enum MutationVariant {
 
     static MutationVariant parse(String arg) throws InvalidParameterException {
         return switch(String.join("", arg).toLowerCase()) {
-            case "fullrandomness", "pełnalosowość" -> FULL_RANDOMNESS;
-            case "slightcorrection", "lekkakorekta" -> SLIGHT_CORRECTION;
+            case "true" -> FULL_RANDOMNESS;
+            case "false" -> SLIGHT_CORRECTION;
             default -> throw new InvalidParameterException("Can't match parmeter to enum variant");
         };
     }

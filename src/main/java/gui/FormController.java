@@ -15,7 +15,7 @@ public class FormController {
     private List<RadioButton> buttonsToValidation = new ArrayList<>();
 
     @FXML
-    private TextField userHeight, userWidth, userPlantNumber, userPlantEnergy, userAnimalNumber, userAnimalEnergy, userNeededEnergy, userProcreationEnergy, userMinMutations, userMaxMutations;
+    private TextField userHeight, userWidth, userPlantNumber, userPlantEnergy, userPlantPerDay, userAnimalNumber, userAnimalEnergy, userNeededEnergy, userProcreationEnergy, userMinMutations, userMaxMutations, userGenotypeLen;
 
     @FXML
     private RadioButton earth, infernalPortal, fullRandomness, slightCorrection, equator, toxicCorpses, fullPredestination, someMadness;
@@ -32,12 +32,14 @@ public class FormController {
         textToValidation.add(userWidth.getText());
         textToValidation.add(userPlantNumber.getText());
         textToValidation.add(userPlantEnergy.getText());
+        textToValidation.add(userPlantPerDay.getText());
         textToValidation.add(userAnimalNumber.getText());
         textToValidation.add(userAnimalEnergy.getText());
         textToValidation.add(userNeededEnergy.getText());
         textToValidation.add(userProcreationEnergy.getText());
         textToValidation.add(userMinMutations.getText());
         textToValidation.add(userMaxMutations.getText());
+        textToValidation.add(userGenotypeLen.getText());
         buttonsToValidation.add(earth);
         buttonsToValidation.add(infernalPortal);
         buttonsToValidation.add(fullRandomness);

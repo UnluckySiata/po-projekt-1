@@ -24,8 +24,8 @@ public class SimulationController {
     private SimulationEngine engine;
     private GridPane grid = new GridPane();
     private SimulationController simulationController;
-    private int fieldsNumX = 10;
-    private int fieldsNumY = 10;
+    private int fieldsNumX;
+    private int fieldsNumY;
     private int mapBoxWidth = 540;
     private int mapBoxHeight = 540;
     private double fieldDim;
@@ -35,7 +35,7 @@ public class SimulationController {
     private AnchorPane simulationBox, mapBox, statisticsBox;
 
     @FXML
-    private Button stopSim, resumeSim;
+    private Button stopSim, endSimulationBtn;
 
     @FXML
     private Text animalsNum, plantsNum, emptyNum, dominantGenotype, avgAnimalEnergy, avgAnimalLifetime;
@@ -44,18 +44,20 @@ public class SimulationController {
         this.map = map;
     }
     public void drawGrid() throws FileNotFoundException {
+        this.fieldsNumY = map.getHeight();
+        this.fieldsNumX = map.getWidth();
 
-        int col = 0, row = 0, maxC = fieldsNumY, maxR = fieldsNumX;
-        this.fieldDim = (mapBoxWidth/fieldsNumX);
+        int col = 0, row = 0, maxC = this.fieldsNumY, maxR = this.fieldsNumX;
+        this.fieldDim = (mapBoxWidth/this.fieldsNumX);
 
         ColumnConstraints colC = new ColumnConstraints(this.fieldDim);
         RowConstraints rowC = new RowConstraints(this.fieldDim);
 
-        for (int i = 0; i <= maxC + 1; ++i) {
+        for (int i = 0; i < maxC; ++i) {
             grid.getColumnConstraints().add(colC);
         }
 
-        for (int i = 0; i <= maxR + 1; ++i) {
+        for (int i = 0; i < maxR; ++i) {
             grid.getRowConstraints().add(rowC);
         }
         addElements(); //to wyjątek rzuca zrób try catcha
@@ -69,19 +71,8 @@ public class SimulationController {
         calculateImgDim();
         int x;
         int y;
-        boolean[] grassFields = map.getPlants();
-        for (int i = 0; i < grassFields.length; i++) {
-            if (grassFields[i]) {
-                GuiElementBox grass = new GuiElementBox(this.imgWidht, this.imgWidht);
-                x = i % fieldsNumY;
-                y = (int)(Math.floor(i/fieldsNumX));
-                grid.add(grass.vbox, x, y);
-            }
-        }
-
-        x = 0;
-        y = 0;
         LinkedList<Animal> animalsFields = map.getAnimals();
+        System.out.println(animalsFields.size());
         for (int i = 0; i < animalsFields.size(); i++) {
             Animal animalOnField = animalsFields.get(i);
             GuiElementBox animal = new GuiElementBox(animalOnField, this.imgWidht, this.imgWidht);
@@ -89,7 +80,17 @@ public class SimulationController {
             y = animalOnField.getPosition().y;
             grid.add(animal.vbox, x, y);
         }
-
+        x = 0;
+        y = 0;
+        boolean[] grassFields = map.getPlants();
+        for (int i = 0; i < grassFields.length; i++) {
+            x = i % fieldsNumY;
+            y = (int)(Math.floor(i/fieldsNumX));
+            if (grassFields[i] && !map.isOccupied(x, y)) {
+                GuiElementBox grass = new GuiElementBox(this.imgWidht, this.imgWidht);
+                grid.add(grass.vbox, x, y);
+            }
+        }
     }
 
     public void calculateImgDim() {
@@ -125,7 +126,8 @@ public class SimulationController {
         return stopSim;
     }
 
-    public Button getResumeBtn() {
-        return resumeSim;
+    public Button getEndSimulationBtn() {
+        return endSimulationBtn;
     }
+
 }

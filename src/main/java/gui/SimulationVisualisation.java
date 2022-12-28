@@ -37,6 +37,11 @@ public class SimulationVisualisation extends Application{
                 simulationEngine.resumeExecution();
                 isPaused = false;
             }
+            System.out.println("przestań");
+        });
+        simulationController.getEndSimulationBtn().setOnAction(e -> {
+            simulationEngine.terminate();
+            System.out.println("should be finished");
         });
 
         simulationController.drawGrid();

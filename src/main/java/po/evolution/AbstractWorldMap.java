@@ -293,4 +293,12 @@ public abstract class AbstractWorldMap {
     public LinkedList<Animal> getAnimals() {
         return animals;
     }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
 }

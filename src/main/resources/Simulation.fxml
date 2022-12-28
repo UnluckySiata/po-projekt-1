@@ -15,13 +15,14 @@
             <Text layoutX="14.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dominujący genotyp:" />
             <Text layoutX="14.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Średnia długsć życia zwierzaka:" />
             <Text layoutX="14.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Średnia energia zwierzaka:" />
-            <Text fx:id="animalsNum" layoutX="180.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="63.73681640625" />
-            <Text fx:id="plantsNum" layoutX="180.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="63.73681640625" />
-            <Text fx:id="emptyNum" layoutX="180.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="63.73681640625" />
-            <Text fx:id="dominantGenotype" layoutX="142.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="139.51171875" />
-            <Text fx:id="avgAnimalLifetime" layoutX="180.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="63.73681640625" />
-            <Text fx:id="avgAnimalEnergy" layoutX="180.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="63.73681640625" />
-            <Button fx:id="stopSim" layoutX="97.0" layoutY="181.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="89.0" text="Stop/Resume" />
+            <Text fx:id="animalsNum" layoutX="180.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="112.611328125" />
+            <Text fx:id="plantsNum" layoutX="180.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="112.611328125" />
+            <Text fx:id="emptyNum" layoutX="180.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="103.73680114746094" />
+            <Text fx:id="dominantGenotype" layoutX="169.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="112.611328125" />
+            <Text fx:id="avgAnimalLifetime" layoutX="191.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="89.60000000000002" />
+            <Text fx:id="avgAnimalEnergy" layoutX="184.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="103.73680114746094" />
+            <Button fx:id="stopSim" layoutX="104.0" layoutY="182.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="89.0" text="Stop/Resume" />
+            <Button fx:id="endSimulationBtn" layoutX="97.0" layoutY="220.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" text="End Simulation" />
          </children>
       </AnchorPane>
    </children>

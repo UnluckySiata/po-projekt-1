@@ -1,3 +1,3 @@
 Map Height,Map Width,Initial Plant Number,Energy From Plant,Plants Per Day,Initial Animal Number,Starting Energy,Energy Needed,Procreation Energy Share,Min Mutations,Max Mutations,Genotype Length,World Variant,Mutation Variant,Plant Growth Variant,Gene Progression Variant
-10,10,11,5,7,5,10,5,0.5,1,15,8,EARTH,FULL_RANDOMNESS,EQUATOR,SOME_MADNESS
+10,10,0,100,10,5,10,5,0.5,1,15,8,EARTH,FULL_RANDOMNESS,EQUATOR,SOME_MADNESS
 10,10,5,5,7,2,10,5,0.5,1,15,8,EARTH,FULL_RANDOMNESS,EQUATOR,SOME_MADNESS

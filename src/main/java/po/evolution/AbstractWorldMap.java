@@ -286,6 +286,10 @@ public abstract class AbstractWorldMap {
         return plantPresent;
     }
 
+    public boolean isOccupied(int x, int y) {
+        return fields.get(new Vector2d(x, y)).size() > 0;
+    }
+
     public LinkedList<Animal> getAnimals() {
         return animals;
     }

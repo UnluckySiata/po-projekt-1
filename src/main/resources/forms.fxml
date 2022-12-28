@@ -71,9 +71,8 @@
       <Line endX="498.5" layoutX="115.0" layoutY="158.0" startX="-115.0" />
       <Text layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wybierz konfiguracje dla symulacji" wrappingWidth="192.13671875" />
       <Text layoutX="14.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stwórz nową konfigurację dla symulacji" wrappingWidth="218.13671875" />
-      <Button layoutX="19.0" layoutY="88.0" mnemonicParsing="false" text="Przykład1" />
-      <Button layoutX="109.0" layoutY="88.0" mnemonicParsing="false" text="Przykład1" />
-      <Button layoutX="198.0" layoutY="88.0" mnemonicParsing="false" text="Przykład1" />
+      <Button fx:id="exConfig1" layoutX="19.0" layoutY="88.0" mnemonicParsing="false" text="Przykładowa symulacja 1" />
+      <Button fx:id="exConfig2" layoutX="183.0" layoutY="88.0" mnemonicParsing="false" text="Przykładowa symulacja 2" />
       <Button fx:id="exportToCsv" layoutX="206.0" layoutY="813.0" mnemonicParsing="false" text="Wyeksportuj statyystki do pliku csv" />
       <Button fx:id="start" layoutX="206.0" layoutY="769.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Start" />
       <Button fx:id="stop" layoutX="344.0" layoutY="769.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Stop" />

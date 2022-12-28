@@ -1,5 +1,7 @@
 package po.evolution;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 import com.opencsv.bean.CsvBindByName;
 
@@ -70,6 +72,27 @@ public class SimulationParameters {
             "Mutation Variant: " + mutationVariant.toString() + "\n" +
             "Genotype Length: " + genotypeLength + "\n" +
             "Gene Progression Variant: " + geneProgressionVariant.toString() + "\n";
+    }
+
+    public Hashtable<String, String> configsInTab() {
+        Hashtable<String, String> configTab = new Hashtable<String, String>();
+        configTab.put("mapWidth", String.valueOf(mapWidth));
+        configTab.put("mapHeight", String.valueOf(mapHeight));
+        configTab.put("worldVariant", worldVariant.toString());
+        configTab.put("initialPlantNum", String.valueOf(initialPlantNum));
+        configTab.put("energyFromPlant", String.valueOf(energyFromPlant));
+        configTab.put("plantsPerDay", String.valueOf(plantsPerDay));
+        configTab.put("plantGrowthVariant", plantGrowthVariant.toString());
+        configTab.put("initialAnimalNum", String.valueOf(initialAnimalNum));
+        configTab.put("startingEnergy", String.valueOf(startingEnergy));
+        configTab.put("energyNeeded", String.valueOf(energyNeeded));
+        configTab.put("procreationEnergyShare", String.valueOf(procreationEnergyShare));
+        configTab.put("minMutations", String.valueOf(minMutations));
+        configTab.put("maxMutations", String.valueOf(maxMutations));
+        configTab.put("mutationVariant", mutationVariant.toString());
+        configTab.put("genotypeLength", String.valueOf(genotypeLength));
+        configTab.put("geneProgressionVariant", geneProgressionVariant.toString());
+        return configTab;
     }
 
 }

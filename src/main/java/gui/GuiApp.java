@@ -4,11 +4,15 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.fxml.FXMLLoader;
+import po.evolution.ConfigurationParser;
+import po.evolution.SimulationParameters;
 
+import java.util.List;
 import java.util.Objects;
 
 public class GuiApp extends Application{
     private SimulationVisualisation simulationVisualisation = new SimulationVisualisation();
+    private List<SimulationParameters> configs = ConfigurationParser.parse("config.csv");
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -31,6 +35,12 @@ public class GuiApp extends Application{
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
+        });
+        formController.getExConfig1Btn().setOnAction(e -> {
+            formController.displayExampleConfig(configs.get(0));
+        });
+        formController.getExConfig2Btn().setOnAction(e -> {
+            formController.displayExampleConfig(configs.get(1));
         });
     }
 

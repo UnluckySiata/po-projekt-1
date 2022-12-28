@@ -4,8 +4,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import po.evolution.SimulationParameters;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 public class FormController {
@@ -21,7 +23,7 @@ public class FormController {
     private RadioButton earth, infernalPortal, fullRandomness, slightCorrection, equator, toxicCorpses, fullPredestination, someMadness;
 
     @FXML
-    private Button start, stop;
+    private Button start, stop, exConfig1, exConfig2;
 
     public void addConfigFromUser() {
         textToValidation.clear();
@@ -49,10 +51,6 @@ public class FormController {
         buttonsToValidation.add(fullPredestination);
         buttonsToValidation.add(someMadness);
     }
-    // przykładowa tablica z konfiguracją: [height, width, initialPlantNum, energyFromPlant, initialAnimalNum,
-    // startingEnergy,energyNeeded, procreationEnergyShare, minMutations, maxMutations, WorldVariant(true-earth, false-infernalPortal),
-    // MutationVariant(true-fullRandomness, flase-slightCorrection), PlantGrowthVariant (true-equator, false-toxicCorpses),
-    // GeneProgressionVariant (true-fullPredestination, flase-someMadness)]
     public List<String> validation(List<String> text, List<RadioButton> buttons) throws IllegalArgumentException{
         for (String input : text) {
             if (input.equals("")) {
@@ -98,12 +96,53 @@ public class FormController {
         return stop;
     }
 
-
-    public int getHeight() {
-        return Integer.parseInt(userConfig.get(0));
+    public void displayExampleConfig(SimulationParameters configs) {
+        Hashtable<String, String> configTab = new Hashtable<String, String>();
+        configTab = configs.configsInTab();
+        System.out.println(configTab);
+        userHeight.setText(configTab.get("mapHeight"));
+        userWidth.setText(configTab.get("mapWidth"));
+        userPlantNumber.setText(configTab.get("initialPlantNum"));
+        userPlantEnergy.setText(configTab.get("energyFromPlant"));
+        userPlantPerDay.setText(configTab.get("plantsPerDay"));
+        userAnimalNumber.setText(configTab.get("initialAnimalNum"));
+        userAnimalEnergy.setText(configTab.get("startingEnergy"));
+        userNeededEnergy.setText(configTab.get("energyNeeded"));
+        userProcreationEnergy.setText(configTab.get("minMutations"));
+        userMinMutations.setText(configTab.get("maxMutations"));
+        userMaxMutations.setText(configTab.get("genotypeLength"));
+        userGenotypeLen.setText(configTab.get("mapHeight"));
+        if (configTab.get("worldVariant").equals("EARTH")) {
+            earth.setSelected(true);
+        } else {
+            infernalPortal.setSelected(true);
+        }
+        if (configTab.get("plantGrowthVariant").equals("EQUATOR")){
+            equator.setSelected(true);
+        } else {
+            toxicCorpses.setSelected(true);
+        }
+        if (configTab.get("mutationVariant").equals("FULL_RANDOMNESS")) {
+            fullRandomness.setSelected(true);
+        } else {
+            slightCorrection.setSelected(true);
+        }
+        if (configTab.get("geneProgressionVariant").equals("FULL_PREDESTINATION")) {
+            fullPredestination.setSelected(true);
+        } else {
+            someMadness.setSelected(true);
+        }
+        userHeight.setText(configTab.get("mapHeight"));
+        userHeight.setText(configTab.get("mapHeight"));
+        userHeight.setText(configTab.get("mapHeight"));
     }
-    public int getWidth() {
-        return Integer.parseInt(userConfig.get(1));
+
+    public Button getExConfig1Btn() {
+        return exConfig1;
+    }
+
+    public Button getExConfig2Btn() {
+        return exConfig2;
     }
 
 }

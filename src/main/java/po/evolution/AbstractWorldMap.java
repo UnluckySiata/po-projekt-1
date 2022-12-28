@@ -148,6 +148,7 @@ public abstract class AbstractWorldMap {
                 if (free.length == 0) {
                     plants = plants + spawned > n ? n : plants + spawned;
                     stats.onPlantSpawn(plants);
+                    return;
                 };
                 int i = new Random().nextInt(free.length);
                 plantPresent[free[i]] = true;

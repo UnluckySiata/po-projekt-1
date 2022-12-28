@@ -8,6 +8,7 @@ public class SimulationEngine implements Runnable {
     private Thread t;
     private boolean suspended;
     private AbstractWorldMap map;
+    private boolean running = true;
     private boolean exportStats = false;
     private String statsFileName = "";
 
@@ -38,7 +39,7 @@ public class SimulationEngine implements Runnable {
     private void waitForResume() {
         synchronized(this) {
             try {
-                while (suspended) t.wait();
+                while (suspended) wait();
             } catch (InterruptedException e) {
                 System.out.println("Execution thread was interrupted " + e.getMessage());
                 System.exit(1);
@@ -51,13 +52,17 @@ public class SimulationEngine implements Runnable {
     }
 
     public synchronized void resumeExecution() {
-        t.notify();
+        notify();
         suspended = false;
+    }
+
+    public void terminate() {
+        running = false;
     }
 
     public void run() {
 
-        while (true) {
+        while (running) {
             if (suspended) waitForResume();
             map.clearDead();
 
@@ -65,7 +70,7 @@ public class SimulationEngine implements Runnable {
 
                 a.move();
                 try {
-                    t.sleep(500);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

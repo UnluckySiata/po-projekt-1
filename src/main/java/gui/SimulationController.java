@@ -115,7 +115,6 @@ public class SimulationController {
             grid.getRowConstraints().clear();
             try {
                 drawGrid();
-                System.out.println("haloooo");
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }

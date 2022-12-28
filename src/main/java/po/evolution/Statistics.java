@@ -12,9 +12,8 @@ public class Statistics {
     private double averageLifetime = 0.0, averageEnergy = 0.0;
     private int[] genotype = new int[0];
 
-    public Statistics(int animals, int plants, int free, double averageEnergy) {
+    public Statistics(int animals, int free, double averageEnergy) {
         this.animals = animals;
-        //this.plants = plants;
         this.free = free;
         this.averageEnergy = averageEnergy;
     }
@@ -81,10 +80,6 @@ public class Statistics {
         averageEnergy = totalEnergy / (double) ++animals;
     }
 
-    void onAnimalSpawn() {
-        double totalEnergy = (double) animals * averageEnergy;
-        averageEnergy = totalEnergy / (double) ++animals;
-    }
     void onAnimalDeath(int newLifetime) {
         double totalEnergy = (double) animals * averageEnergy;
         averageEnergy = totalEnergy / (double) --animals;

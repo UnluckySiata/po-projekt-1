@@ -33,7 +33,7 @@ public abstract class AbstractWorldMap {
         freeFields = n;
         plantPresent = new boolean[n];
         animalsDied = new int[n];
-        stats = new Statistics(animalsNum, plants, freeFields, (double) params.startingEnergy);
+        stats = new Statistics(animalsNum, freeFields, (double) params.startingEnergy);
 
         for (int x = 0; x < width; ++x) {
             for (int y = 0; y < height; ++y) {
@@ -122,6 +122,7 @@ public abstract class AbstractWorldMap {
         if (plants == n) return;
         boolean inPrefered, check = true;
         int[] perm = generateFavoredPermutation();
+        int spawned = 0;
 
         for (int p = 0; p < quantity; ++p) {
             inPrefered = Math.random() < 0.8;
@@ -135,6 +136,7 @@ public abstract class AbstractWorldMap {
                 if (free.length > 0) {
                     int i = new Random().nextInt(free.length);
                     plantPresent[free[i]] = true;
+                    ++spawned;
                 } else check = false;
 
             }
@@ -143,15 +145,19 @@ public abstract class AbstractWorldMap {
                     .filter(x -> !plantPresent[x])
                     .toArray();
 
-                if (free.length == 0) return;
+                if (free.length == 0) {
+                    plants = plants + spawned > n ? n : plants + spawned;
+                    stats.onPlantSpawn(plants);
+                };
                 int i = new Random().nextInt(free.length);
                 plantPresent[free[i]] = true;
+                ++spawned;
 
             }
 
         }
 
-        plants = plants + quantity > n ? n : plants + quantity;
+        plants = plants + spawned > n ? n : plants + spawned;
 
         stats.onPlantSpawn(plants);
     }
@@ -213,6 +219,7 @@ public abstract class AbstractWorldMap {
                 if (val > currGenotypeMax) {
                     domimantGenotype = genotype;
                     currGenotypeMax = val;
+                    stats.acquireDominantGenotype(domimantGenotype);
                 }
             } else {
                 genotypes.put(genotype, 1);
@@ -228,6 +235,8 @@ public abstract class AbstractWorldMap {
 
             if (plantPresent[pos.x + pos.y * width] && animalsOnField.size() > 0) {
                 plantPresent[pos.x + pos.y * width] = false;
+                --plants;
+                stats.onPlantEaten(params.energyFromPlant);
 
                 List<Animal> considered = animalsOnField.stream()
                     .filter(a -> a.getEnergy() == Collections.max(animalsOnField, (a1, a2) -> a1.getEnergy() > a2.getEnergy() ? -1 :

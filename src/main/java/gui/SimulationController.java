@@ -59,7 +59,7 @@ public class SimulationController {
             grid.getRowConstraints().add(rowC);
         }
         addElements(); //to wyjątek rzuca zrób try catcha
-        this.showStats();
+        showStats();
         mapBox.getChildren().add(grid);
         grid.setGridLinesVisible(true);
     }
@@ -108,6 +108,7 @@ public class SimulationController {
 
     public void refreshMap() {
         Platform.runLater(() -> {
+            mapBox.getChildren().clear();
             grid.getChildren().clear();
             grid.setGridLinesVisible(false);
             grid.getColumnConstraints().clear();

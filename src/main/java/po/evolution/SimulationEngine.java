@@ -38,7 +38,7 @@ public class SimulationEngine implements Runnable {
     private void waitForResume() {
         synchronized(this) {
             try {
-                while (suspended) wait();
+                while (suspended) t.wait();
             } catch (InterruptedException e) {
                 System.out.println("Execution thread was interrupted " + e.getMessage());
                 System.exit(1);
@@ -50,7 +50,7 @@ public class SimulationEngine implements Runnable {
         suspended = true;
     }
 
-    public void resumeExecution() {
+    public synchronized void resumeExecution() {
         t.notify();
         suspended = false;
     }
@@ -64,21 +64,24 @@ public class SimulationEngine implements Runnable {
             for (Animal a : map.animals) {
 
                 a.move();
+                try {
+                    t.sleep(500);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+                app.refreshMap();
             }
 
             map.feast();
+            app.refreshMap();
 
             map.spawnPlants(map.params.plantsPerDay);
+            app.refreshMap();
 
             if (exportStats) {
                 map.stats.writeToCSV(statsFileName);
             }
 
-            int plants = 0;
-
-
-
-            app.refreshMap();
         }
 
     }

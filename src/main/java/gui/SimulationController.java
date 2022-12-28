@@ -48,19 +48,38 @@ public class SimulationController {
         this.fieldsNumX = map.getWidth();
 
         int col = 0, row = 0, maxC = this.fieldsNumY, maxR = this.fieldsNumX;
-        this.fieldDim = (mapBoxWidth/this.fieldsNumX);
+        if (this.fieldsNumY > this.fieldsNumX) {
+            this.fieldDim = (mapBoxHeight/this.fieldsNumY);
+        } else {
+            this.fieldDim = (mapBoxWidth/this.fieldsNumX);
+        }
 
         ColumnConstraints colC = new ColumnConstraints(mapBoxWidth / fieldsNumX);
         RowConstraints rowC = new RowConstraints(mapBoxHeight / fieldsNumY);
 
-        for (int i = 0; i < maxC; ++i) {
+        for (int i = 0; i < this.fieldsNumX; i+=1) {
             grid.getColumnConstraints().add(colC);
         }
 
-        for (int i = 0; i < maxR; ++i) {
+        for (int i = 0; i < fieldsNumY; i+=1) {
             grid.getRowConstraints().add(rowC);
         }
 
+        for (int i = 0; i < maxR; ++i) {
+            for (int j = 0; j < maxC; ++j){
+                Label label = new Label(" ");
+                GridPane.setHalignment(label, HPos.CENTER);
+                grid.add(label, i, j);
+            }
+        }
+
+        addElements(); //to wyjątek rzuca zrób try catcha
+        showStats();
+        mapBox.getChildren().add(grid);
+        grid.setGridLinesVisible(true);
+    }
+
+    public void refreshGrid() throws FileNotFoundException {
         addElements(); //to wyjątek rzuca zrób try catcha
         showStats();
         mapBox.getChildren().add(grid);
@@ -72,6 +91,23 @@ public class SimulationController {
         calculateImgDim();
         int x;
         int y;
+
+        boolean[] grassFields = map.getPlants();
+        for (int i = 0; i < grassFields.length; i++) {
+            x = i % this.fieldsNumX;
+            y = i / this.fieldsNumX;
+            if (grassFields[i] && !map.isOccupied(x, y)) {
+                GuiElementBox grass = new GuiElementBox(this.imgWidht, this.imgWidht);
+                grid.add(grass.vbox, x, y);
+            }
+            else {
+                Label label = new Label(" ");
+                GridPane.setHalignment(label, HPos.CENTER);
+                grid.add(label, x, y);
+            }
+        }
+        x = 0;
+        y = 0;
         LinkedList<Animal> animalsFields = map.getAnimals();
         System.out.println(animalsFields.size());
         for (int i = 0; i < animalsFields.size(); i++) {
@@ -80,17 +116,6 @@ public class SimulationController {
             x = animalOnField.getPosition().x;
             y = animalOnField.getPosition().y;
             grid.add(animal.vbox, x, y);
-        }
-        x = 0;
-        y = 0;
-        boolean[] grassFields = map.getPlants();
-        for (int i = 0; i < grassFields.length; i++) {
-            x = i % fieldsNumX;
-            y = i / fieldsNumX;
-            if (grassFields[i] && !map.isOccupied(x, y)) {
-                GuiElementBox grass = new GuiElementBox(this.imgWidht, this.imgWidht);
-                grid.add(grass.vbox, x, y);
-            }
         }
     }
 
@@ -113,10 +138,8 @@ public class SimulationController {
             mapBox.getChildren().clear();
             grid.getChildren().clear();
             grid.setGridLinesVisible(false);
-            //grid.getColumnConstraints().clear();
-            //grid.getRowConstraints().clear();
             try {
-                drawGrid();
+                refreshGrid();
             } catch (FileNotFoundException e) {
                 throw new RuntimeException(e);
             }

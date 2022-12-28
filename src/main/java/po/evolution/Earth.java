@@ -8,7 +8,7 @@ public class Earth extends AbstractWorldMap {
 
     public Vector2d nextPosition(Vector2d wantedPosition) {
         int x = 0, y = 0;
-        if (wantedPosition.x == -1) x = width;
+        if (wantedPosition.x == -1) x = width - 1;
         else if (wantedPosition.x == width) x = 0;
         else x = wantedPosition.x;
 

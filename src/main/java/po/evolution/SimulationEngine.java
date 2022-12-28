@@ -18,6 +18,7 @@ public class SimulationEngine implements Runnable {
         this.app = app;
         t = new Thread(this);
         suspended = false;
+        t.start();
     }
 
     public SimulationEngine(AbstractWorldMap map, String statsFileName) {
@@ -27,6 +28,7 @@ public class SimulationEngine implements Runnable {
         t = new Thread(this);
         suspended = false;
         map.stats.prepareAndCreateCSV(statsFileName);
+        t.start();
     }
 
     public Thread getThread() {
@@ -54,22 +56,30 @@ public class SimulationEngine implements Runnable {
     }
 
     public void run() {
-        map.clearDead();
 
-        for (Animal a : map.animals) {
+        while (true) {
             if (suspended) waitForResume();
+            map.clearDead();
 
-            a.move();
+            for (Animal a : map.animals) {
+
+                a.move();
+            }
+
+            map.feast();
+
+            map.spawnPlants(map.params.plantsPerDay);
+
+            if (exportStats) {
+                map.stats.writeToCSV(statsFileName);
+            }
+
+            int plants = 0;
+
+
+
+            app.refreshMap();
         }
-
-        map.feast();
-
-        map.spawnPlants(map.params.plantsPerDay);
-
-        if (exportStats) {
-            map.stats.writeToCSV(statsFileName);
-        }
-        app.refreshMap();
 
     }
 }

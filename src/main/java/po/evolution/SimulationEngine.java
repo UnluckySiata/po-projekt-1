@@ -1,5 +1,9 @@
 package po.evolution;
 
+import gui.GuiApp;
+import gui.SimulationController;
+import gui.SimulationVisualisation;
+
 public class SimulationEngine implements Runnable {
     private Thread t;
     private boolean suspended;
@@ -7,8 +11,11 @@ public class SimulationEngine implements Runnable {
     private boolean exportStats = false;
     private String statsFileName = "";
 
-    public SimulationEngine(AbstractWorldMap map) {
+    private SimulationController app;
+
+    public SimulationEngine(AbstractWorldMap map, SimulationController app) {
         this.map = map;
+        this.app = app;
         t = new Thread(this);
         suspended = false;
     }
@@ -62,6 +69,7 @@ public class SimulationEngine implements Runnable {
         if (exportStats) {
             map.stats.writeToCSV(statsFileName);
         }
+        app.refreshMap();
 
     }
 }

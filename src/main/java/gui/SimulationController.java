@@ -1,6 +1,8 @@
 package gui;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -12,8 +14,8 @@ import po.evolution.AbstractWorldMap;
 import po.evolution.Animal;
 import po.evolution.SimulationEngine;
 
-import java.awt.*;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
 import java.util.LinkedList;
 
 public class SimulationController {
@@ -33,14 +35,16 @@ public class SimulationController {
     private AnchorPane simulationBox, mapBox, statisticsBox;
 
     @FXML
-    private Text animalsNum, plantsNum, emptyNum, dominantGenotype, avgAnimalEnergy;
+    private Button stopSim, resumeSim;
+
+    @FXML
+    private Text animalsNum, plantsNum, emptyNum, dominantGenotype, avgAnimalEnergy, avgAnimalLifetime;
 
     public void setMap(AbstractWorldMap map) {
         this.map = map;
     }
     public void drawGrid() throws FileNotFoundException {
 
-//        System.out.println(mapBoxWidth +"|||||"+ mapBoxHeight);
         int col = 0, row = 0, maxC = fieldsNumY, maxR = fieldsNumX;
         this.fieldDim = (mapBoxWidth/fieldsNumX);
 
@@ -55,7 +59,7 @@ public class SimulationController {
             grid.getRowConstraints().add(rowC);
         }
         addElements(); //to wyjątek rzuca zrób try catcha
-
+        this.showStats();
         mapBox.getChildren().add(grid);
         grid.setGridLinesVisible(true);
     }
@@ -93,4 +97,35 @@ public class SimulationController {
         this.imgWidht = this.fieldDim - this.fieldDim/5;
     }
 
+    public void showStats() {
+        animalsNum.setText(Integer.toString(map.stats.getAnimalNum()));
+        plantsNum.setText(Integer.toString(map.stats.getPlantNum()));
+        emptyNum.setText(Integer.toString(map.stats.getFree()));
+        dominantGenotype.setText(Arrays.toString(map.stats.getDominantGenotype()));
+        avgAnimalEnergy.setText(String.valueOf(map.stats.getAverageEnergy()));
+        avgAnimalLifetime.setText(String.valueOf(map.stats.getAverageLifetime()));
+    }
+
+    public void refreshMap() {
+        Platform.runLater(() -> {
+            grid.getChildren().clear();
+            grid.setGridLinesVisible(false);
+            grid.getColumnConstraints().clear();
+            grid.getRowConstraints().clear();
+            try {
+                drawGrid();
+                System.out.println("haloooo");
+            } catch (FileNotFoundException e) {
+                throw new RuntimeException(e);
+            }
+        });
+    }
+
+    public Button getStopBtn() {
+        return stopSim;
+    }
+
+    public Button getResumeBtn() {
+        return resumeSim;
+    }
 }

@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane fx:id="simulationBox" prefHeight="540.0" prefWidth="770.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SimulationController">
+<AnchorPane fx:id="simulationBox" prefHeight="550.0" prefWidth="833.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SimulationController">
    <children>
-      <AnchorPane fx:id="mapBox" layoutX="258.0" layoutY="8.0" prefHeight="546.0" prefWidth="540.0" />
-      <AnchorPane fx:id="statisticsBox" prefHeight="540.0" prefWidth="258.0">
+      <AnchorPane fx:id="mapBox" layoutX="293.0" layoutY="2.0" prefHeight="546.0" prefWidth="540.0" />
+      <AnchorPane fx:id="statisticsBox" layoutY="5.0" prefHeight="540.0" prefWidth="297.0">
          <children>
             <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość zwierząt na mapie: " />
             <Text layoutX="14.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość roślin na mapie: " />
@@ -18,9 +18,11 @@
             <Text fx:id="animalsNum" layoutX="180.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="63.73681640625" />
             <Text fx:id="plantsNum" layoutX="180.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="63.73681640625" />
             <Text fx:id="emptyNum" layoutX="180.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="63.73681640625" />
-            <Text fx:id="dominantGenotype" layoutX="180.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="63.73681640625" />
+            <Text fx:id="dominantGenotype" layoutX="142.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="139.51171875" />
             <Text fx:id="avgAnimalLifetime" layoutX="180.0" layoutY="135.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="63.73681640625" />
             <Text fx:id="avgAnimalEnergy" layoutX="180.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="63.73681640625" />
+            <Button fx:id="stopSim" layoutX="26.0" layoutY="183.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="89.0" text="Stop" />
+            <Button fx:id="resumeSim" layoutX="161.0" layoutY="183.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="89.0" text="Resume" />
          </children>
       </AnchorPane>
    </children>

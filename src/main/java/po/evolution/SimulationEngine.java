@@ -70,7 +70,7 @@ public class SimulationEngine implements Runnable {
 
                 a.move();
                 try {
-                    Thread.sleep(100);
+                    Thread.sleep(70);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

@@ -50,8 +50,8 @@ public class SimulationController {
         int col = 0, row = 0, maxC = this.fieldsNumY, maxR = this.fieldsNumX;
         this.fieldDim = (mapBoxWidth/this.fieldsNumX);
 
-        ColumnConstraints colC = new ColumnConstraints(this.fieldDim);
-        RowConstraints rowC = new RowConstraints(this.fieldDim);
+        ColumnConstraints colC = new ColumnConstraints(mapBoxWidth / fieldsNumX);
+        RowConstraints rowC = new RowConstraints(mapBoxHeight / fieldsNumY);
 
         for (int i = 0; i < maxC; ++i) {
             grid.getColumnConstraints().add(colC);
@@ -60,6 +60,7 @@ public class SimulationController {
         for (int i = 0; i < maxR; ++i) {
             grid.getRowConstraints().add(rowC);
         }
+
         addElements(); //to wyjątek rzuca zrób try catcha
         showStats();
         mapBox.getChildren().add(grid);
@@ -84,8 +85,8 @@ public class SimulationController {
         y = 0;
         boolean[] grassFields = map.getPlants();
         for (int i = 0; i < grassFields.length; i++) {
-            x = i % fieldsNumY;
-            y = (int)(Math.floor(i/fieldsNumX));
+            x = i % fieldsNumX;
+            y = i / fieldsNumX;
             if (grassFields[i] && !map.isOccupied(x, y)) {
                 GuiElementBox grass = new GuiElementBox(this.imgWidht, this.imgWidht);
                 grid.add(grass.vbox, x, y);
@@ -112,8 +113,8 @@ public class SimulationController {
             mapBox.getChildren().clear();
             grid.getChildren().clear();
             grid.setGridLinesVisible(false);
-            grid.getColumnConstraints().clear();
-            grid.getRowConstraints().clear();
+            //grid.getColumnConstraints().clear();
+            //grid.getRowConstraints().clear();
             try {
                 drawGrid();
             } catch (FileNotFoundException e) {

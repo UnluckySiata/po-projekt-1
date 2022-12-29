@@ -46,7 +46,7 @@ public class Statistics {
     public void writeToCSV(String filename) {
         try {
             File f = new File("/src/main/resources/statistics/" + filename);
-            FileWriter writer = new FileWriter(f);
+            FileWriter writer = new FileWriter(f, true);
 
             CSVWriter csvWriter = new CSVWriter(writer);
             String[] statistics = {

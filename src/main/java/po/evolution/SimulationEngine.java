@@ -63,8 +63,15 @@ public class SimulationEngine implements Runnable {
     public void run() {
 
         while (running) {
+            if (map.animals.size() == 0) {
+                map.calculateFree();
+                app.refreshMap();
+                return;
+            }
             if (suspended) waitForResume();
             map.clearDead();
+            map.calculateFree();
+            app.refreshMap();
 
             for (Animal a : map.animals) {
 
@@ -80,7 +87,11 @@ public class SimulationEngine implements Runnable {
             map.feast();
             app.refreshMap();
 
+            map.procreate();
+            app.refreshMap();
+
             map.spawnPlants(map.params.plantsPerDay);
+            map.calculateFree();
             app.refreshMap();
 
             if (exportStats) {

@@ -30,10 +30,9 @@ public abstract class AbstractWorldMap {
         n = width * height;
         this.params = params;
         animalsNum = params.initialAnimalNum;
-        freeFields = n;
         plantPresent = new boolean[n];
         animalsDied = new int[n];
-        stats = new Statistics(animalsNum, freeFields, (double) params.startingEnergy);
+        stats = new Statistics(animalsNum, n, (double) params.startingEnergy);
 
         for (int x = 0; x < width; ++x) {
             for (int y = 0; y < height; ++y) {
@@ -53,11 +52,21 @@ public abstract class AbstractWorldMap {
     public abstract Vector2d nextPosition(Vector2d wantedPosition);
 
     public void clearDead() {
+        List<Animal> dead = animals.stream()
+            .filter(a -> a.getEnergy() == 0)
+            .toList();
+
+        for (Animal a: dead) {
+            onDeath(a);
+        }
+
+        /*
         animals.removeIf(a -> a.getEnergy() == 0);
 
         for (LinkedList<Animal> field : fields.values()) {
             field.removeIf(a -> a.getEnergy() == 0);
         }
+        */
     }
 
     public void onDeath(Animal a) {
@@ -173,7 +182,6 @@ public abstract class AbstractWorldMap {
 
             Animal a = new Animal(params, pos, 0, this);
             LinkedList<Animal> animalsOnField = fields.get(pos);
-            if (animalsOnField.size() == 0) --freeFields;
             animalsOnField.add(a);
             animals.push(a);
 
@@ -195,12 +203,12 @@ public abstract class AbstractWorldMap {
 
     void procreateOnField(Vector2d pos) {
         LinkedList<Animal> animalsOnField = fields.get(pos);
-        if (animals.size() < 2) return;
+        if (animalsOnField.size() < 2) return;
 
         // descending
-        animals.sort((a1, a2) -> a1.getEnergy() > a2.getEnergy() ? -1 : a1.getEnergy() == a2.getEnergy() ? 0 : 1);
-        Animal first = animals.get(0);
-        Animal second = animals.get(1);
+        animalsOnField.sort((a1, a2) -> a1.getEnergy() > a2.getEnergy() ? -1 : a1.getEnergy() == a2.getEnergy() ? 0 : 1);
+        Animal first = animalsOnField.get(0);
+        Animal second = animalsOnField.get(1);
 
         Animal child = first.procreate(second);
 
@@ -224,6 +232,14 @@ public abstract class AbstractWorldMap {
                 }
             } else {
                 genotypes.put(genotype, 1);
+            }
+        }
+    }
+
+    void procreate() {
+        for (int x = 0; x < width; ++x) {
+            for (int y = 0; y < height; ++y) {
+                procreateOnField(new Vector2d(x, y));
             }
         }
     }
@@ -275,6 +291,17 @@ public abstract class AbstractWorldMap {
 
         }
 
+    }
+
+    void calculateFree() {
+        int counter = 0;
+
+        for (int x = 0; x < width; ++x) {
+            for (int y = 0; y < height; ++y) {
+                if (!isOccupied(x, y) && !plantPresent[y * width + x]) ++counter;
+            }
+        }
+        stats.updateFree(counter);
     }
 
     void positionChanged(Animal a, Vector2d oldPosition, Vector2d newPosition) {

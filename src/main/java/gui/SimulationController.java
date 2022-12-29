@@ -109,7 +109,6 @@ public class SimulationController {
         x = 0;
         y = 0;
         LinkedList<Animal> animalsFields = map.getAnimals();
-        System.out.println(animalsFields.size());
         for (int i = 0; i < animalsFields.size(); i++) {
             Animal animalOnField = animalsFields.get(i);
             GuiElementBox animal = new GuiElementBox(animalOnField, this.imgWidht, this.imgWidht);
@@ -129,8 +128,8 @@ public class SimulationController {
         plantsNum.setText(Integer.toString(map.stats.getPlantNum()));
         emptyNum.setText(Integer.toString(map.stats.getFree()));
         dominantGenotype.setText(Arrays.toString(map.stats.getDominantGenotype()));
-        avgAnimalEnergy.setText(String.valueOf(map.stats.getAverageEnergy()));
-        avgAnimalLifetime.setText(String.valueOf(map.stats.getAverageLifetime()));
+        avgAnimalEnergy.setText(Double.toString(map.stats.getAverageEnergy()));
+        avgAnimalLifetime.setText(Double.toString(map.stats.getAverageLifetime()));
     }
 
     public void refreshMap() {

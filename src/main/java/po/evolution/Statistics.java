@@ -84,7 +84,7 @@ public class Statistics {
         double totalEnergy = (double) animals * averageEnergy;
         averageEnergy = totalEnergy / (double) --animals;
 
-        double daysLived = animalsDied * averageLifetime;
+        double daysLived = (double) animalsDied * averageLifetime;
 
         averageLifetime = (daysLived + (double) newLifetime) / ((double) ++animalsDied);
     }
@@ -102,6 +102,8 @@ public class Statistics {
     void acquireDominantGenotype(int[] genotype) {
         this.genotype = genotype;
     }
+
+    void updateFree(int newFree) { free = newFree; }
 
     // getters
     public int getAnimalNum() { return animals; }

@@ -36,7 +36,7 @@
             <Insets left="1.0" />
          </padding>
       </RadioButton>
-      <RadioButton fx:id="equator" layoutX="217.0" layoutY="349.0" mnemonicParsing="false" text="Zalesone równiki">
+      <RadioButton fx:id="equator" layoutX="217.0" layoutY="349.0" mnemonicParsing="false" text="Zalesione równiki">
          <toggleGroup>
             <ToggleGroup fx:id="plantGrowthVariant" />
          </toggleGroup></RadioButton>

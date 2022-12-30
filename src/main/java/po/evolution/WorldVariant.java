@@ -4,8 +4,7 @@ import java.security.InvalidParameterException;
 
 public enum WorldVariant {
     EARTH, INFERNAL_PORTAL;
-
-    static WorldVariant parse(String arg) throws InvalidParameterException {
+    public static WorldVariant parse(String arg) throws InvalidParameterException {
         return switch(String.join("", arg).toLowerCase()) {
             case "true" -> EARTH;
             case "false" -> INFERNAL_PORTAL;

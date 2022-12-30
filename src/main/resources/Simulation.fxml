@@ -4,10 +4,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="simulationBox" prefHeight="550.0" prefWidth="833.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SimulationController">
+<AnchorPane fx:id="simulationBox" prefHeight="550.0" prefWidth="865.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SimulationController">
    <children>
-      <AnchorPane fx:id="mapBox" layoutX="293.0" layoutY="2.0" prefHeight="546.0" prefWidth="540.0" />
-      <AnchorPane fx:id="statisticsBox" layoutY="5.0" prefHeight="540.0" prefWidth="297.0">
+      <AnchorPane fx:id="mapBox" layoutX="6.0" layoutY="7.0" prefHeight="546.0" prefWidth="540.0" style="-fx-background-color: lime;" />
+      <AnchorPane fx:id="statisticsBox" layoutX="567.0" layoutY="10.0" prefHeight="540.0" prefWidth="332.0">
          <children>
             <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość zwierząt na mapie: " />
             <Text layoutX="14.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość roślin na mapie: " />
@@ -18,11 +18,22 @@
             <Text fx:id="animalsNum" layoutX="180.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="112.611328125" />
             <Text fx:id="plantsNum" layoutX="180.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="112.611328125" />
             <Text fx:id="emptyNum" layoutX="180.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="103.73680114746094" />
-            <Text fx:id="dominantGenotype" layoutX="169.0" layoutY="108.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="112.611328125" />
+            <Text fx:id="dominantGenotype" layoutX="141.0" layoutY="107.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="180.63983154296875" />
             <Text fx:id="avgAnimalLifetime" layoutX="191.0" layoutY="134.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="89.60000000000002" />
-            <Text fx:id="avgAnimalEnergy" layoutX="184.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="103.73680114746094" />
-            <Button fx:id="stopSim" layoutX="104.0" layoutY="182.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="89.0" text="Stop/Resume" />
-            <Button fx:id="endSimulationBtn" layoutX="97.0" layoutY="220.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" text="End Simulation" />
+            <Text fx:id="avgAnimalEnergy" layoutX="183.0" layoutY="167.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="103.73680114746094" />
+            <Button fx:id="stopSim" layoutX="124.0" layoutY="449.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="89.0" text="Stop/Resume" />
+            <Button fx:id="endSimulationBtn" layoutX="117.0" layoutY="487.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="104.0" text="End Simulation" />
+            <Text layoutX="17.0" layoutY="265.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość energii: " />
+            <Text layoutX="17.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aktualny genotyp: " />
+            <Text layoutX="17.0" layoutY="319.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość dzieci: " />
+            <Text layoutX="17.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Długość żcyia:" wrappingWidth="89.59999999999991" />
+            <Text layoutX="17.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dzień śmierci: " />
+            <Text fx:id="singleEnergy" layoutX="177.0" layoutY="270.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="112.611328125" />
+            <Text fx:id="singleGenotype" layoutX="177.0" layoutY="297.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="112.611328125" />
+            <Text fx:id="singleChildrenNum" layoutX="177.0" layoutY="324.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="103.73680114746094" />
+            <Text fx:id="singleLifetime" layoutX="177.0" layoutY="350.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="113.98828125" />
+            <Text fx:id="singleDayOfDeath" layoutX="177.0" layoutY="373.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="89.60000000000002" />
+            <Text layoutX="56.0" layoutY="225.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informacje dotyczące konkretnego zwierza" />
          </children>
       </AnchorPane>
    </children>

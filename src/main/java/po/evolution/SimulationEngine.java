@@ -22,8 +22,9 @@ public class SimulationEngine implements Runnable {
         t.start();
     }
 
-    public SimulationEngine(AbstractWorldMap map, String statsFileName) {
+    public SimulationEngine(AbstractWorldMap map, String statsFileName, SimulationController app) {
         this.map = map;
+        this.app = app;
         this.exportStats = true;
         this.statsFileName = statsFileName;
         t = new Thread(this);
@@ -77,7 +78,7 @@ public class SimulationEngine implements Runnable {
 
                 a.move();
                 try {
-                    Thread.sleep(70);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

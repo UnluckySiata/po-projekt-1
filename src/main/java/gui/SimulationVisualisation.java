@@ -16,8 +16,9 @@ public class SimulationVisualisation extends Application{
     private AbstractWorldMap map;
 
     private boolean isPaused = false;
-    public void init(Stage primaryStage) throws Exception {
-        map = earth == WorldVariant.EARTH ? new Earth(configs.get(0)) : new InfernalPortal(configs.get(0));
+    public void init(Stage primaryStage, SimulationParameters userConfig) throws Exception {
+//        map = earth == WorldVariant.EARTH ? new Earth(configs.get(0)) : new InfernalPortal(configs.get(0));
+        map = earth == WorldVariant.EARTH ? new Earth(userConfig) : new InfernalPortal(userConfig);
 
         FXMLLoader root = new FXMLLoader(getClass().getResource("/Simulation.fxml"));
         Scene scene = new Scene(root.load(), 950, 700);
@@ -26,8 +27,9 @@ public class SimulationVisualisation extends Application{
         primaryStage.setScene(scene);
         SimulationController simulationController = root.getController();
         this.simulationController = simulationController;
-        simulationController.setMap(map);
+//        simulationController.setMap(map, 20);
         SimulationEngine simulationEngine = new SimulationEngine(this.map, this.simulationController);
+        simulationController.setMap(map, Integer.parseInt(userConfig.configsInTab().get("startingEnergy")));
         start(primaryStage);
         simulationController.getStopBtn().setOnAction(e -> {
             if (!isPaused) {

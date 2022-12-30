@@ -5,16 +5,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import po.evolution.SimulationParameters;
+import po.evolution.SimulationVariant;
+import po.evolution.WorldVariant;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
+
+import static po.evolution.ConfigurationParser.writeAndGet;
 
 public class FormController {
 
     private List<String> userConfig = new ArrayList<>();
     private List<String> textToValidation = new ArrayList<>();
     private List<RadioButton> buttonsToValidation = new ArrayList<>();
+    private List<String> validatedConfig = new ArrayList<>();
+    private SimulationParameters userParameters;
 
     @FXML
     private TextField userHeight, userWidth, userPlantNumber, userPlantEnergy, userPlantPerDay, userAnimalNumber, userAnimalEnergy, userNeededEnergy, userProcreationEnergy, userMinMutations, userMaxMutations, userGenotypeLen;
@@ -24,6 +30,7 @@ public class FormController {
 
     @FXML
     private Button start, stop, exConfig1, exConfig2;
+
 
     public void addConfigFromUser() {
         textToValidation.clear();
@@ -76,24 +83,21 @@ public class FormController {
     }
     public String getFromToggleGroup(RadioButton button1, RadioButton button2){
         if (button1.isSelected()) {
-            return "true";
+            return String.valueOf(SimulationVariant.parse(button1.getText()));
         } else if (button2.isSelected()) {
-            return "false";
+            return String.valueOf(SimulationVariant.parse(button2.getText()));
         } else {
             return "";
         }
     }
-    public Button getStartButton() {
-        return start;
-    }
 
-    public List<String> getUserConfig() {
+    public SimulationParameters getUserConfig() {
         addConfigFromUser();
-        return validation(textToValidation, buttonsToValidation);
-    }
-
-    public Button getStopButton() {
-        return stop;
+        validatedConfig = validation(textToValidation, buttonsToValidation);
+        System.out.println(validatedConfig);
+//        SimulationParameters p = new SimulationParameters();
+        return writeAndGet(validatedConfig, "userconfig.csv");
+//        return p;
     }
 
     public void displayExampleConfig(SimulationParameters configs) {
@@ -133,8 +137,14 @@ public class FormController {
             someMadness.setSelected(true);
         }
         userHeight.setText(configTab.get("mapHeight"));
-        userHeight.setText(configTab.get("mapHeight"));
-        userHeight.setText(configTab.get("mapHeight"));
+    }
+
+    public Button getStartButton() {
+        return start;
+    }
+
+    public Button getStopButton() {
+        return stop;
     }
 
     public Button getExConfig1Btn() {

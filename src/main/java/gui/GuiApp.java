@@ -25,13 +25,17 @@ public class GuiApp extends Application{
 
         FormController formController = root.getController();
         formController.getStartButton().setOnAction(e -> {
-            formController.getUserConfig();
-
+            Stage stage = new Stage();
+            try {
+                simulationVisualisation.init(stage, formController.getUserConfig());
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
         });
         formController.getStopButton().setOnAction(e -> {
             Stage stage = new Stage();
             try {
-                simulationVisualisation.init(stage);
+                simulationVisualisation.init(stage, formController.getUserConfig());
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }

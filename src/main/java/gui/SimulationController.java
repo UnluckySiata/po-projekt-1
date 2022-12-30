@@ -31,6 +31,7 @@ public class SimulationController {
     private double fieldDim;
     private double imgWidht;
     private double imgHeight;
+    private int startEnergy;
     @FXML
     private AnchorPane simulationBox, mapBox, statisticsBox;
 
@@ -40,8 +41,9 @@ public class SimulationController {
     @FXML
     private Text animalsNum, plantsNum, emptyNum, dominantGenotype, avgAnimalEnergy, avgAnimalLifetime;
 
-    public void setMap(AbstractWorldMap map) {
+    public void setMap(AbstractWorldMap map, int startingEnergy) {
         this.map = map;
+        this.startEnergy = startingEnergy;
     }
     public void drawGrid() throws FileNotFoundException {
         this.fieldsNumY = map.getHeight();
@@ -92,6 +94,16 @@ public class SimulationController {
         int x;
         int y;
 
+        LinkedList<Animal> animalsFields = map.getAnimals();
+        for (int i = 0; i < animalsFields.size(); i++) {
+            Animal animalOnField = animalsFields.get(i);
+            GuiElementBox animal = new GuiElementBox(startEnergy, animalOnField.getEnergy(),this.imgWidht, this.imgWidht);
+            x = animalOnField.getPosition().x;
+            y = animalOnField.getPosition().y;
+            grid.add(animal.vbox, x, y);
+        }
+        x = 0;
+        y = 0;
         boolean[] grassFields = map.getPlants();
         for (int i = 0; i < grassFields.length; i++) {
             x = i % this.fieldsNumX;
@@ -105,16 +117,6 @@ public class SimulationController {
                 GridPane.setHalignment(label, HPos.CENTER);
                 grid.add(label, x, y);
             }
-        }
-        x = 0;
-        y = 0;
-        LinkedList<Animal> animalsFields = map.getAnimals();
-        for (int i = 0; i < animalsFields.size(); i++) {
-            Animal animalOnField = animalsFields.get(i);
-            GuiElementBox animal = new GuiElementBox(animalOnField, this.imgWidht, this.imgWidht);
-            x = animalOnField.getPosition().x;
-            y = animalOnField.getPosition().y;
-            grid.add(animal.vbox, x, y);
         }
     }
 

@@ -74,7 +74,7 @@ public class SimulationEngine implements Runnable {
 
                 a.move();
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(100);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

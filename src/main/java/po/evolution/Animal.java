@@ -151,7 +151,7 @@ public class Animal {
                     Random r = new Random();
                     int nextGene;
                     do {
-                        nextGene = r.nextInt(8);
+                        nextGene = r.nextInt(n);
                     } while (nextGene == currGene);
                     currGene = nextGene;
                     break;

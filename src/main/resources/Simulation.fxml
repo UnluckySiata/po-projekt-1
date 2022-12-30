@@ -7,7 +7,7 @@
 <AnchorPane fx:id="simulationBox" prefHeight="550.0" prefWidth="865.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SimulationController">
    <children>
       <AnchorPane fx:id="mapBox" layoutX="6.0" layoutY="7.0" prefHeight="540.0" prefWidth="540.0" style="-fx-background-color: lime;" />
-      <AnchorPane fx:id="statisticsBox" layoutX="567.0" layoutY="10.0" prefHeight="540.0" prefWidth="332.0">
+      <AnchorPane fx:id="statisticsBox" layoutX="567.0" layoutY="10.0" prefHeight="540.0" prefWidth="348.0">
          <children>
             <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość zwierząt na mapie: " />
             <Text layoutX="14.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość roślin na mapie: " />
@@ -18,7 +18,7 @@
             <Text fx:id="animalsNum" layoutX="154.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="112.611328125" />
             <Text fx:id="plantsNum" layoutX="135.0" layoutY="53.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="112.611328125" />
             <Text fx:id="emptyNum" layoutX="170.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="103.73680114746094" />
-            <Text fx:id="dominantGenotype" layoutX="142.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="180.63983154296875" />
+            <Text fx:id="dominantGenotype" layoutX="136.0" layoutY="162.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="199.63983154296875" />
             <Text fx:id="avgAnimalLifetime" layoutX="191.0" layoutY="109.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="89.60000000000002" />
             <Text fx:id="avgAnimalEnergy" layoutX="170.0" layoutY="136.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="103.73680114746094" />
             <Button fx:id="stopSim" layoutX="124.0" layoutY="449.0" mnemonicParsing="false" prefHeight="17.0" prefWidth="89.0" text="Stop/Resume" />

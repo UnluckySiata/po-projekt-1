@@ -88,7 +88,7 @@ public class Animal {
         }
 
         Random r = new Random();
-        int genesMutated = r.nextInt(params.maxMutations - params.minMutations) + params.minMutations;
+        int genesMutated = r.nextInt(params.maxMutations - params.minMutations + 1) + params.minMutations;
         int[] genesToMutate = r.ints(genesMutated, 0, n)
             .distinct()
             .sorted()

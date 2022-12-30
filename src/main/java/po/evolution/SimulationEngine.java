@@ -63,6 +63,7 @@ public class SimulationEngine implements Runnable {
 
         while (running) {
             if (map.animals.size() == 0) {
+                map.calculateFree();
                 app.refreshMap();
                 return;
             }
@@ -74,10 +75,12 @@ public class SimulationEngine implements Runnable {
 
                 a.move();
                 try {
+                    //Thread.sleep(500 / map.animals.size());
                     Thread.sleep(100);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
+                map.calculateFree();
                 app.refreshMap();
             }
 
@@ -92,6 +95,7 @@ public class SimulationEngine implements Runnable {
             app.refreshMap();
 
             map.spawnPlants(map.params.plantsPerDay);
+            map.calculateFree();
             app.refreshMap();
 
             if (exportStats) {

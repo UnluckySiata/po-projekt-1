@@ -11,6 +11,7 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 public abstract class AbstractWorldMap {
+    protected Vector2d upperBound, lowerBound = new Vector2d(-1, -1);
     protected final int height, width, n;
     protected SimulationParameters params;
     protected int[] animalsDied;
@@ -28,6 +29,7 @@ public abstract class AbstractWorldMap {
     public AbstractWorldMap(SimulationParameters params) {
         height = params.mapHeight;
         width = params.mapWidth;
+        upperBound = new Vector2d(width + 1, height + 1);
         n = width * height;
         freeFields = n;
         this.params = params;
@@ -168,7 +170,7 @@ public abstract class AbstractWorldMap {
                 if (free.length == 0) {
                     plants = plants + spawned > n ? n : plants + spawned;
                     stats.onPlantSpawn(plants);
-                    stats.updateFree(freeFields);
+                    //stats.updateFree(freeFields);
                     return;
                 };
                 int i = new Random().nextInt(free.length);
@@ -184,7 +186,7 @@ public abstract class AbstractWorldMap {
         plants = plants + spawned > n ? n : plants + spawned;
 
         stats.onPlantSpawn(plants);
-        stats.updateFree(freeFields);
+        //stats.updateFree(freeFields);
     }
 
     private void spawnAnimals() {
@@ -201,7 +203,7 @@ public abstract class AbstractWorldMap {
                 occupiedPositions.add(pos);
                 --freeFields;
             }
-            stats.updateFree(freeFields);
+            //stats.updateFree(freeFields);
 
             animalsOnField.add(a);
             animals.push(a);
@@ -234,6 +236,7 @@ public abstract class AbstractWorldMap {
         Animal child = first.procreate(second);
 
         if (child != null) {
+            System.out.println("alive!");
             animalsOnField.push(child);
             animals.push(child);
 
@@ -331,8 +334,12 @@ public abstract class AbstractWorldMap {
         oldField.remove(a);
         newField.push(a);
 
-        stats.updateFree(freeFields);
+        //stats.updateFree(freeFields);
 
+    }
+
+    boolean outOfBounds(Vector2d pos) {
+        return pos.precedes(lowerBound) && pos.follows(upperBound);
     }
 
     public boolean[] getPlants() {

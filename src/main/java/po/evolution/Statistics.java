@@ -74,7 +74,7 @@ public class Statistics {
     }
 
     // setters
-    void onMove(Animal a) {
+    void onMove() {
         double totalEnergy = (double) animals * averageEnergy;
         totalEnergy -= 1.0;
         averageEnergy = totalEnergy / (double) animals;

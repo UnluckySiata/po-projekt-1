@@ -130,13 +130,15 @@ public class Animal {
         Vector2d wantedPosition = oldPosition.add(orientation.toUnitVector());
 
         --energy;
-        if (params.worldVariant == WorldVariant.INFERNAL_PORTAL) {
+        if (params.worldVariant == WorldVariant.INFERNAL_PORTAL && map.outOfBounds(wantedPosition)) {
             energy = (int) (1.0 - params.procreationEnergyShare) * energy;
         }
         position = map.nextPosition(wantedPosition);
 
         // inform observer
         map.positionChanged(this, oldPosition, position);
+
+        map.stats.onMove();
 
         switch (params.geneProgressionVariant) {
             case FULL_PREDESTINATION:

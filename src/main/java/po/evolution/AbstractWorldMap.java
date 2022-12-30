@@ -5,12 +5,12 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Random;
 import java.util.stream.IntStream;
 
 public abstract class AbstractWorldMap {
-    //protected Vector2d lowerLeft, upperRight;
     protected final int height, width, n;
     protected SimulationParameters params;
     protected int[] animalsDied;
@@ -18,7 +18,8 @@ public abstract class AbstractWorldMap {
     protected int plants = 0;
     protected HashMap<Vector2d, LinkedList<Animal>> fields = new HashMap<>();
     protected LinkedList<Animal> animals = new LinkedList<>();
-    protected int animalsNum, freeFields;
+    protected LinkedHashSet<Vector2d> occupiedPositions = new LinkedHashSet<>(); // Przez zwierzęta
+    protected int animalsNum, freeFields; // Wolne od zwierząt i roślin
     protected HashMap<int[], Integer> genotypes = new HashMap<>();
     protected int currGenotypeMax = 0;
     protected int[] domimantGenotype = new int[0];
@@ -28,6 +29,7 @@ public abstract class AbstractWorldMap {
         height = params.mapHeight;
         width = params.mapWidth;
         n = width * height;
+        freeFields = n;
         this.params = params;
         animalsNum = params.initialAnimalNum;
         plantPresent = new boolean[n];
@@ -75,6 +77,11 @@ public abstract class AbstractWorldMap {
         ++animalsDied[i];
 
         LinkedList<Animal> animalsOnField = fields.get(pos);
+
+        if (animalsOnField.size() == 1) {
+            --freeFields;
+            occupiedPositions.remove(pos);
+        }
         animals.remove(a);
         animalsOnField.remove(a);
         --animalsNum;
@@ -147,6 +154,9 @@ public abstract class AbstractWorldMap {
                     int i = new Random().nextInt(free.length);
                     plantPresent[free[i]] = true;
                     ++spawned;
+
+                    Vector2d pos = new Vector2d(free[i] % width, free[i] / width);
+                    if (!occupiedPositions.contains(pos)) --freeFields;
                 } else check = false;
 
             }
@@ -158,12 +168,15 @@ public abstract class AbstractWorldMap {
                 if (free.length == 0) {
                     plants = plants + spawned > n ? n : plants + spawned;
                     stats.onPlantSpawn(plants);
+                    stats.updateFree(freeFields);
                     return;
                 };
                 int i = new Random().nextInt(free.length);
                 plantPresent[free[i]] = true;
                 ++spawned;
 
+                Vector2d pos = new Vector2d(free[i] % width, free[i] / width);
+                if (!occupiedPositions.contains(pos)) --freeFields;
             }
 
         }
@@ -171,6 +184,7 @@ public abstract class AbstractWorldMap {
         plants = plants + spawned > n ? n : plants + spawned;
 
         stats.onPlantSpawn(plants);
+        stats.updateFree(freeFields);
     }
 
     private void spawnAnimals() {
@@ -183,6 +197,12 @@ public abstract class AbstractWorldMap {
 
             Animal a = new Animal(params, pos, 0, this);
             LinkedList<Animal> animalsOnField = fields.get(pos);
+            if (animalsOnField.size() == 0) {
+                occupiedPositions.add(pos);
+                --freeFields;
+            }
+            stats.updateFree(freeFields);
+
             animalsOnField.add(a);
             animals.push(a);
 
@@ -202,7 +222,7 @@ public abstract class AbstractWorldMap {
         }
     }
 
-    void procreateOnField(Vector2d pos) {
+    void procreate(Vector2d pos) {
         LinkedList<Animal> animalsOnField = fields.get(pos);
         if (animalsOnField.size() < 2) return;
 
@@ -237,59 +257,47 @@ public abstract class AbstractWorldMap {
         }
     }
 
-    void procreate() {
-        for (int x = 0; x < width; ++x) {
-            for (int y = 0; y < height; ++y) {
-                procreateOnField(new Vector2d(x, y));
-            }
-        }
-    }
+    void feast(Vector2d pos) {
 
-    void feast() {
+        LinkedList<Animal> animalsOnField = fields.get(pos);
 
-        for (Map.Entry<Vector2d, LinkedList<Animal>> field : fields.entrySet()) {
-            Vector2d pos = field.getKey();
-            LinkedList<Animal> animalsOnField = field.getValue();
+        if (plantPresent[pos.x + pos.y * width] && animalsOnField.size() > 0) {
+            plantPresent[pos.x + pos.y * width] = false;
+            --plants;
+            stats.onPlantEaten(params.energyFromPlant);
 
-            if (plantPresent[pos.x + pos.y * width] && animalsOnField.size() > 0) {
-                plantPresent[pos.x + pos.y * width] = false;
-                --plants;
-                stats.onPlantEaten(params.energyFromPlant);
+            List<Animal> considered = animalsOnField.stream()
+                .filter(a -> a.getEnergy() == Collections.max(animalsOnField, (a1, a2) -> a1.getEnergy() > a2.getEnergy() ? -1 :
+                                                                a1.getEnergy() == a2.getEnergy() ? 0 : 1).getEnergy())
+                .toList();
 
-                List<Animal> considered = animalsOnField.stream()
-                    .filter(a -> a.getEnergy() == Collections.max(animalsOnField, (a1, a2) -> a1.getEnergy() > a2.getEnergy() ? -1 :
-                                                                  a1.getEnergy() == a2.getEnergy() ? 0 : 1).getEnergy())
-                    .toList();
-
-                if (considered.size() == 1) {
-                    considered.get(0).eat();
-                    return;
-                }
-
-                considered = considered.stream()
-                    .filter(a -> a.getLifetime() == Collections.max(animalsOnField, (a1, a2) -> a1.getLifetime() > a2.getLifetime() ? -1 :
-                                                                  a1.getLifetime() == a2.getLifetime() ? 0 : 1).getLifetime())
-                    .toList();
-
-                if (considered.size() == 1) {
-                    considered.get(0).eat();
-                    return;
-                }
-
-                considered = considered.stream()
-                    .filter(a -> a.getChildrenNumber() == Collections.max(animalsOnField, (a1, a2) -> a1.getChildrenNumber() > a2.getChildrenNumber() ? -1 :
-                                                                  a1.getChildrenNumber() == a2.getChildrenNumber() ? 0 : 1).getChildrenNumber())
-                    .toList();
-
-                if (considered.size() == 1) {
-                    considered.get(0).eat();
-                } else {
-                    int i = new Random().nextInt(considered.size());
-                    considered.get(i).eat();
-                }
-
+            if (considered.size() == 1) {
+                considered.get(0).eat();
+                return;
             }
 
+            considered = considered.stream()
+                .filter(a -> a.getLifetime() == Collections.max(animalsOnField, (a1, a2) -> a1.getLifetime() > a2.getLifetime() ? -1 :
+                                                                a1.getLifetime() == a2.getLifetime() ? 0 : 1).getLifetime())
+                .toList();
+
+            if (considered.size() == 1) {
+                considered.get(0).eat();
+                return;
+            }
+
+            considered = considered.stream()
+                .filter(a -> a.getChildrenNumber() == Collections.max(animalsOnField, (a1, a2) -> a1.getChildrenNumber() > a2.getChildrenNumber() ? -1 :
+                                                                a1.getChildrenNumber() == a2.getChildrenNumber() ? 0 : 1).getChildrenNumber())
+                .toList();
+
+            if (considered.size() == 1) {
+                considered.get(0).eat();
+            } else {
+                considered = animalsOnField;
+                int i = new Random().nextInt(considered.size());
+                considered.get(i).eat();
+            }
         }
 
     }
@@ -306,8 +314,25 @@ public abstract class AbstractWorldMap {
     }
 
     void positionChanged(Animal a, Vector2d oldPosition, Vector2d newPosition) {
-        fields.get(oldPosition).remove(a);
-        fields.get(newPosition).push(a);
+        LinkedList<Animal> oldField = fields.get(oldPosition);
+        LinkedList<Animal> newField = fields.get(newPosition);
+
+        if (oldField.size() == 1) {
+            if (!plantPresent[oldPosition.y * width + oldPosition.x]) ++freeFields;
+
+            occupiedPositions.remove(oldPosition);
+        }
+        if (newField.size() == 0) {
+            if (!plantPresent[newPosition.y * width + newPosition.x]) --freeFields;
+
+            occupiedPositions.add(newPosition);
+        }
+
+        oldField.remove(a);
+        newField.push(a);
+
+        stats.updateFree(freeFields);
+
     }
 
     public boolean[] getPlants() {
@@ -315,7 +340,7 @@ public abstract class AbstractWorldMap {
     }
 
     public boolean isOccupied(int x, int y) {
-        return fields.get(new Vector2d(x, y)).size() > 0;
+        return occupiedPositions.contains(new Vector2d(x, y));
     }
 
     public LinkedList<Animal> getAnimals() {

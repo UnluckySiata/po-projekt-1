@@ -77,7 +77,6 @@ public class Statistics {
     void onMove(Animal a) {
         double totalEnergy = (double) animals * averageEnergy;
         totalEnergy -= 1.0;
-        if (!a.isAlive()) --animals;
         averageEnergy = totalEnergy / (double) animals;
     }
 

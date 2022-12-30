@@ -236,7 +236,6 @@ public abstract class AbstractWorldMap {
         Animal child = first.procreate(second);
 
         if (child != null) {
-            System.out.println("alive!");
             animalsOnField.push(child);
             animals.push(child);
 

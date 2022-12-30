@@ -217,6 +217,7 @@ public abstract class AbstractWorldMap {
                 if (val > currGenotypeMax) {
                     domimantGenotype = genotype;
                     currGenotypeMax = val;
+                    stats.acquireDominantGenotype(domimantGenotype);
                 }
             } else {
                 genotypes.put(genotype, 1);

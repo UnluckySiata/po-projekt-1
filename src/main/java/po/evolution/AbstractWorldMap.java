@@ -97,10 +97,11 @@ public abstract class AbstractWorldMap {
         switch (params.plantGrowthVariant) {
             case TOXIC_CORPSES:
                 int quantity = (int) (0.2 * n);
-                List<Integer> perm = IntStream.range(0, n).boxed().toList();
-
-                Collections.sort(perm, (Integer i, Integer j) -> animalsDied[i] > animalsDied[j] ? 1
-                        : animalsDied[i] == animalsDied[j] ? 0 : -1);
+                List<Integer> perm = IntStream.range(0, n)
+                    .boxed()
+                    .sorted((i, j) -> animalsDied[i] > animalsDied[j] ? 1
+                        : animalsDied[i] == animalsDied[j] ? 0 : -1)
+                    .toList();
 
                 result = perm.stream().limit(quantity).mapToInt(Integer::intValue).toArray();
                 break;

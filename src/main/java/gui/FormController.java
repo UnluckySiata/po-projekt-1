@@ -62,8 +62,9 @@ public class FormController {
         for (String input : text) {
             if (input.equals("")) {
                 throw new IllegalArgumentException("Wszystkie pola muszą być wypełnione!");
-            } else if (!input.matches("[0-9]+")) {
-                throw new IllegalArgumentException("Tylko liczby!");
+            } else if (!input.matches("[0][.][1-9]+") && !input.matches("[0-9]+")) {
+                System.out.println(input);
+                throw new IllegalArgumentException("Tylko liczby lub ułamki!");
             }
             userConfig.add(input);
         }
@@ -107,10 +108,10 @@ public class FormController {
         userAnimalNumber.setText(configTab.get("initialAnimalNum"));
         userAnimalEnergy.setText(configTab.get("startingEnergy"));
         userNeededEnergy.setText(configTab.get("energyNeeded"));
-        userProcreationEnergy.setText(configTab.get("minMutations"));
-        userMinMutations.setText(configTab.get("maxMutations"));
-        userMaxMutations.setText(configTab.get("genotypeLength"));
-        userGenotypeLen.setText(configTab.get("mapHeight"));
+        userProcreationEnergy.setText(configTab.get("procreationEnergyShare"));
+        userMinMutations.setText(configTab.get("minMutations"));
+        userMaxMutations.setText(configTab.get("maxMutations"));
+        userGenotypeLen.setText(configTab.get("genotypeLength"));
         if (configTab.get("worldVariant").equals("EARTH")) {
             earth.setSelected(true);
         } else {

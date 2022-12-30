@@ -18,6 +18,8 @@ import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.LinkedList;
 
+import static java.lang.Math.round;
+
 public class SimulationController {
 
     private AbstractWorldMap map;
@@ -130,8 +132,8 @@ public class SimulationController {
         plantsNum.setText(Integer.toString(map.stats.getPlantNum()));
         emptyNum.setText(Integer.toString(map.stats.getFree()));
         dominantGenotype.setText(Arrays.toString(map.stats.getDominantGenotype()));
-        avgAnimalEnergy.setText(Double.toString(map.stats.getAverageEnergy()));
-        avgAnimalLifetime.setText(Double.toString(map.stats.getAverageLifetime()));
+        avgAnimalEnergy.setText(Double.toString(Math.round(map.stats.getAverageEnergy())));
+        avgAnimalLifetime.setText(Double.toString(Math.round(map.stats.getAverageLifetime())));
     }
 
     public void refreshMap() {

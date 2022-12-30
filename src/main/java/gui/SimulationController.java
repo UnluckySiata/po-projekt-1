@@ -45,7 +45,7 @@ public class SimulationController {
         this.map = map;
         this.startEnergy = startingEnergy;
     }
-    public void drawGrid() throws FileNotFoundException {
+    public void drawGrid(){
         this.fieldsNumY = map.getHeight();
         this.fieldsNumX = map.getWidth();
 
@@ -89,7 +89,7 @@ public class SimulationController {
     }
 
 
-    public void addElements() throws FileNotFoundException {
+    public void addElements(){
         calculateImgDim();
         int x;
         int y;

@@ -1,8 +1,6 @@
 package po.evolution;
 
-import gui.GuiApp;
 import gui.SimulationController;
-import gui.SimulationVisualisation;
 
 public class SimulationEngine implements Runnable {
     private Thread t;
@@ -22,7 +20,7 @@ public class SimulationEngine implements Runnable {
         t.start();
     }
 
-    public SimulationEngine(AbstractWorldMap map, String statsFileName, SimulationController app) {
+    public SimulationEngine(AbstractWorldMap map, SimulationController app , String statsFileName) {
         this.map = map;
         this.app = app;
         this.exportStats = true;

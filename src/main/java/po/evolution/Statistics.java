@@ -20,7 +20,13 @@ public class Statistics {
 
     public void prepareAndCreateCSV(String filename) {
         try {
-            File f = new File("/src/main/resources/statistics/" + filename);
+            File ifExist = new File("src\\main\\resources\\statistics\\" + filename);
+            if (ifExist.exists()) {
+                System.out.println("Plik z taką nazwą już istnieje!");
+                System.exit(1);
+            }
+            File f = new File("src\\main\\resources\\statistics\\" + filename);
+            System.out.println(f.createNewFile());
             FileWriter writer = new FileWriter(f);
 
             CSVWriter csvWriter = new CSVWriter(writer);
@@ -45,7 +51,7 @@ public class Statistics {
 
     public void writeToCSV(String filename) {
         try {
-            File f = new File("/src/main/resources/statistics/" + filename);
+            File f = new File("src\\main\\resources\\statistics\\" + filename);
             FileWriter writer = new FileWriter(f, true);
 
             CSVWriter csvWriter = new CSVWriter(writer);

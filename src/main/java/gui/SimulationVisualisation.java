@@ -15,8 +15,10 @@ public class SimulationVisualisation extends Application{
     private WorldVariant earth = WorldVariant.EARTH;
     private AbstractWorldMap map;
 
+    private SimulationEngine simulationEngine;
+
     private boolean isPaused = false;
-    public void init(Stage primaryStage, SimulationParameters userConfig) throws Exception {
+    public void init(Stage primaryStage, SimulationParameters userConfig, boolean toExport, String exportFileName) throws Exception {
 //        map = earth == WorldVariant.EARTH ? new Earth(configs.get(0)) : new InfernalPortal(configs.get(0));
         map = earth == WorldVariant.EARTH ? new Earth(userConfig) : new InfernalPortal(userConfig);
 
@@ -28,7 +30,11 @@ public class SimulationVisualisation extends Application{
         SimulationController simulationController = root.getController();
         this.simulationController = simulationController;
 //        simulationController.setMap(map, 20);
-        SimulationEngine simulationEngine = new SimulationEngine(this.map, this.simulationController);
+        if (toExport) {
+            simulationEngine = new SimulationEngine(this.map, this.simulationController, exportFileName);
+        } else {
+            simulationEngine = new SimulationEngine(this.map, this.simulationController);
+        }
         simulationController.setMap(map, Integer.parseInt(userConfig.configsInTab().get("startingEnergy")));
         start(primaryStage);
         simulationController.getStopBtn().setOnAction(e -> {
@@ -39,13 +45,11 @@ public class SimulationVisualisation extends Application{
                 simulationEngine.resumeExecution();
                 isPaused = false;
             }
-            System.out.println("przestań");
         });
         simulationController.getEndSimulationBtn().setOnAction(e -> {
+            simulationEngine.resumeExecution();
             simulationEngine.terminate();
-            System.out.println("should be finished");
         });
-
         simulationController.drawGrid();
     }
 

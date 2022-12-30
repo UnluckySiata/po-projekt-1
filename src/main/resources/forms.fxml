@@ -13,17 +13,17 @@
    <children>
       <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Konfiguracja symulacji" wrappingWidth="126.13671875" />
       <Line endX="498.5" layoutX="115.0" layoutY="42.0" startX="-115.0" />
-      <Text layoutX="19.0" layoutY="232.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wysokość" wrappingWidth="110.5703125" />
-      <Text layoutX="19.0" layoutY="266.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Szerokość" wrappingWidth="110.5703125" />
-      <Text layoutX="19.0" layoutY="300.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rodzaj mapy" wrappingWidth="110.5703125" />
-      <Text layoutX="15.0" layoutY="368.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rodzaj wzrostu roślin" wrappingWidth="119.5703125" />
-      <Text layoutX="17.0" layoutY="334.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rodzaj mutacji" wrappingWidth="110.5703125" />
-      <RadioButton fx:id="earth" layoutX="217.0" layoutY="281.0" mnemonicParsing="false" text="Kula ziemska">
+      <Text layoutX="21.0" layoutY="252.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wysokość" wrappingWidth="110.5703125" />
+      <Text layoutX="21.0" layoutY="286.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Szerokość" wrappingWidth="110.5703125" />
+      <Text layoutX="21.0" layoutY="320.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rodzaj mapy" wrappingWidth="110.5703125" />
+      <Text layoutX="17.0" layoutY="388.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rodzaj wzrostu roślin" wrappingWidth="119.5703125" />
+      <Text layoutX="19.0" layoutY="354.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rodzaj mutacji" wrappingWidth="110.5703125" />
+      <RadioButton fx:id="earth" layoutX="219.0" layoutY="301.0" mnemonicParsing="false" text="Kula ziemska">
          <toggleGroup>
             <ToggleGroup fx:id="worldVariant" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="infernalPortal" layoutX="358.0" layoutY="281.0" mnemonicParsing="false" text="Piekielny portal" toggleGroup="$worldVariant" />
-      <RadioButton fx:id="fullRandomness" layoutX="217.0" layoutY="315.0" mnemonicParsing="false" text="Pełna losowość">
+      <RadioButton fx:id="infernalPortal" layoutX="360.0" layoutY="301.0" mnemonicParsing="false" text="Piekielny portal" toggleGroup="$worldVariant" />
+      <RadioButton fx:id="fullRandomness" layoutX="219.0" layoutY="335.0" mnemonicParsing="false" text="Pełna losowość">
          <padding>
             <Insets left="1.0" />
          </padding>
@@ -31,54 +31,53 @@
             <ToggleGroup fx:id="mutationVariant" />
          </toggleGroup>
       </RadioButton>
-      <RadioButton fx:id="slightCorrection" layoutX="358.0" layoutY="315.0" mnemonicParsing="false" text="Lekka korekta" toggleGroup="$mutationVariant">
+      <RadioButton fx:id="slightCorrection" layoutX="360.0" layoutY="335.0" mnemonicParsing="false" text="Lekka korekta" toggleGroup="$mutationVariant">
          <padding>
             <Insets left="1.0" />
          </padding>
       </RadioButton>
-      <RadioButton fx:id="equator" layoutX="217.0" layoutY="349.0" mnemonicParsing="false" text="Zalesione równiki">
+      <RadioButton fx:id="equator" layoutX="219.0" layoutY="369.0" mnemonicParsing="false" text="Zalesione równiki">
          <toggleGroup>
             <ToggleGroup fx:id="plantGrowthVariant" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="toxicCorpses" layoutX="358.0" layoutY="349.0" mnemonicParsing="false" text="Toksyczne trupy" toggleGroup="$plantGrowthVariant" />
-      <TextField fx:id="userHeight" layoutX="217.0" layoutY="209.0" />
-      <TextField fx:id="userWidth" layoutX="217.0" layoutY="243.0" />
-      <Text layoutX="14.0" layoutY="402.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rodzaj zachowania" wrappingWidth="119.5703125" />
-      <RadioButton fx:id="fullPredestination" layoutX="217.0" layoutY="383.0" mnemonicParsing="false" text="Pełna predystancja">
+      <RadioButton fx:id="toxicCorpses" layoutX="360.0" layoutY="369.0" mnemonicParsing="false" text="Toksyczne trupy" toggleGroup="$plantGrowthVariant" />
+      <TextField fx:id="userHeight" layoutX="219.0" layoutY="229.0" />
+      <TextField fx:id="userWidth" layoutX="219.0" layoutY="263.0" />
+      <Text layoutX="16.0" layoutY="422.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Rodzaj zachowania" wrappingWidth="119.5703125" />
+      <RadioButton fx:id="fullPredestination" layoutX="219.0" layoutY="403.0" mnemonicParsing="false" text="Pełna predystancja">
          <toggleGroup>
             <ToggleGroup fx:id="geneProgtessionVariant" />
          </toggleGroup></RadioButton>
-      <RadioButton fx:id="someMadness" layoutX="358.0" layoutY="383.0" mnemonicParsing="false" text="Nieco szaleństwa" toggleGroup="$geneProgtessionVariant" />
-      <Text layoutX="15.0" layoutY="436.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Początkowa ilość roślin" wrappingWidth="126.13671875" />
-      <Text layoutX="17.0" layoutY="473.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Energia z roślin" wrappingWidth="126.13671875" />
-      <Text layoutX="17.0" layoutY="504.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość roślin rosnących codziennie" wrappingWidth="184.13671875" />
-      <Text layoutX="17.0" layoutY="538.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Początkowa ilość zwierząt" wrappingWidth="173.13671875" />
-      <Text layoutX="17.0" layoutY="572.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Początkowa energia zwierząt" wrappingWidth="161.13671875" />
-      <Text layoutX="17.0" layoutY="606.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Energia potrzebna do najedzenia" wrappingWidth="184.13671875" />
-      <Text layoutX="17.0" layoutY="640.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Energia potrzebna do rozmnożenia" wrappingWidth="192.13671875" />
-      <Text layoutX="17.0" layoutY="674.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minimalna ilość mutacji" wrappingWidth="126.13671875" />
-      <Text layoutX="17.0" layoutY="708.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maksymalna ilość mutacji" wrappingWidth="149.0" />
-      <TextField fx:id="userPlantNumber" layoutX="217.0" layoutY="419.0" />
-      <TextField fx:id="userPlantEnergy" layoutX="217.0" layoutY="452.0" />
-      <TextField fx:id="userPlantPerDay" layoutX="217.0" layoutY="486.0" />
-      <TextField fx:id="userAnimalNumber" layoutX="217.0" layoutY="520.0" />
-      <TextField fx:id="userAnimalEnergy" layoutX="217.0" layoutY="554.0" />
-      <TextField layoutX="217.0" layoutY="588.0" />
-      <TextField fx:id="userNeededEnergy" layoutX="217.0" layoutY="588.0" />
-      <TextField fx:id="userProcreationEnergy" layoutX="217.0" layoutY="622.0" />
-      <TextField fx:id="userMinMutations" layoutX="217.0" layoutY="659.0" />
-      <TextField fx:id="userMaxMutations" layoutX="217.0" layoutY="693.0" />
-      <Line endX="498.5" layoutX="115.0" layoutY="158.0" startX="-115.0" />
+      <RadioButton fx:id="someMadness" layoutX="360.0" layoutY="403.0" mnemonicParsing="false" text="Nieco szaleństwa" toggleGroup="$geneProgtessionVariant" />
+      <Text layoutX="17.0" layoutY="456.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Początkowa ilość roślin" wrappingWidth="126.13671875" />
+      <Text layoutX="19.0" layoutY="493.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Energia z roślin" wrappingWidth="126.13671875" />
+      <Text layoutX="19.0" layoutY="524.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość roślin rosnących codziennie" wrappingWidth="184.13671875" />
+      <Text layoutX="19.0" layoutY="558.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Początkowa ilość zwierząt" wrappingWidth="173.13671875" />
+      <Text layoutX="19.0" layoutY="592.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Początkowa energia zwierząt" wrappingWidth="161.13671875" />
+      <Text layoutX="19.0" layoutY="626.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Energia potrzebna do najedzenia" wrappingWidth="184.13671875" />
+      <Text layoutX="19.0" layoutY="660.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Energia potrzebna do rozmnożenia" wrappingWidth="192.13671875" />
+      <Text layoutX="19.0" layoutY="694.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Minimalna ilość mutacji" wrappingWidth="126.13671875" />
+      <Text layoutX="17.0" layoutY="749.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Maksymalna ilość mutacji" wrappingWidth="149.0" />
+      <TextField fx:id="userPlantNumber" layoutX="219.0" layoutY="439.0" />
+      <TextField fx:id="userPlantEnergy" layoutX="219.0" layoutY="472.0" />
+      <TextField fx:id="userPlantPerDay" layoutX="219.0" layoutY="506.0" />
+      <TextField fx:id="userAnimalNumber" layoutX="219.0" layoutY="540.0" />
+      <TextField fx:id="userAnimalEnergy" layoutX="219.0" layoutY="574.0" />
+      <TextField layoutX="219.0" layoutY="608.0" />
+      <TextField fx:id="userNeededEnergy" layoutX="219.0" layoutY="608.0" />
+      <TextField fx:id="userProcreationEnergy" layoutX="219.0" layoutY="642.0" />
+      <TextField fx:id="userMinMutations" layoutX="219.0" layoutY="679.0" />
+      <TextField fx:id="userMaxMutations" layoutX="217.0" layoutY="734.0" />
+      <Line endX="498.5" layoutX="117.0" layoutY="178.0" startX="-115.0" />
       <Text layoutX="14.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Wybierz konfiguracje dla symulacji" wrappingWidth="192.13671875" />
-      <Text layoutX="14.0" layoutY="179.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stwórz nową konfigurację dla symulacji" wrappingWidth="218.13671875" />
+      <Text layoutX="16.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Stwórz nową konfigurację dla symulacji" wrappingWidth="218.13671875" />
       <Button fx:id="exConfig1" layoutX="19.0" layoutY="88.0" mnemonicParsing="false" text="Przykładowa symulacja 1" />
       <Button fx:id="exConfig2" layoutX="183.0" layoutY="88.0" mnemonicParsing="false" text="Przykładowa symulacja 2" />
-      <Button fx:id="exportToCsv" layoutX="206.0" layoutY="813.0" mnemonicParsing="false" text="Wyeksportuj statyystki do pliku csv" />
-      <Button fx:id="start" layoutX="206.0" layoutY="769.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Start" />
-      <Button fx:id="stop" layoutX="344.0" layoutY="769.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Stop" />
-      <Line endX="493.0" layoutX="120.0" layoutY="756.0" startX="-120.0" />
-      <Text fx:id="ifChosenConfig" layoutX="-1.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nie wybrano żadnej przykładowej konfiguracji!" textAlignment="CENTER" wrappingWidth="614.0" />
-      <Text layoutX="15.0" layoutY="742.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Długość genotypu" wrappingWidth="149.0" />
-      <TextField fx:id="userGenotypeLen" layoutX="215.0" layoutY="727.0" />
+      <Button fx:id="exportToCsv" layoutX="18.0" layoutY="132.0" mnemonicParsing="false" text="Wyeksportuj statystki do pliku csv" />
+      <Button fx:id="start" layoutX="274.0" layoutY="820.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="68.0" text="Start" />
+      <Line endX="493.0" layoutX="120.0" layoutY="804.0" startX="-120.0" />
+      <Text layoutX="15.0" layoutY="783.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Długość genotypu" wrappingWidth="149.0" />
+      <TextField fx:id="userGenotypeLen" layoutX="215.0" layoutY="768.0" />
+      <TextField fx:id="exportFileName" layoutX="234.0" layoutY="132.0" promptText="Podaj nazwę pliku" />
    </children>
 </AnchorPane>

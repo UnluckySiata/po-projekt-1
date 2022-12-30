@@ -13,7 +13,9 @@ import java.util.Objects;
 public class GuiApp extends Application{
     private SimulationVisualisation simulationVisualisation = new SimulationVisualisation();
     private List<SimulationParameters> configs = ConfigurationParser.parse("config.csv");
+    private boolean toExport = false;
 
+    private String exportFileName = "";
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader root = new FXMLLoader(getClass().getResource("/forms.fxml"));
@@ -27,15 +29,7 @@ public class GuiApp extends Application{
         formController.getStartButton().setOnAction(e -> {
             Stage stage = new Stage();
             try {
-                simulationVisualisation.init(stage, formController.getUserConfig());
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-        });
-        formController.getStopButton().setOnAction(e -> {
-            Stage stage = new Stage();
-            try {
-                simulationVisualisation.init(stage, formController.getUserConfig());
+                simulationVisualisation.init(stage, formController.getUserConfig(), toExport, exportFileName);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }
@@ -45,6 +39,10 @@ public class GuiApp extends Application{
         });
         formController.getExConfig2Btn().setOnAction(e -> {
             formController.displayExampleConfig(configs.get(1));
+        });
+        formController.getExportToCsvBtn().setOnAction(e -> {
+            exportFileName = formController.getExportFileName();
+            toExport = !exportFileName.equals("");
         });
     }
 

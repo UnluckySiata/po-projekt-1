@@ -23,13 +23,13 @@ public class FormController {
     private SimulationParameters userParameters;
 
     @FXML
-    private TextField userHeight, userWidth, userPlantNumber, userPlantEnergy, userPlantPerDay, userAnimalNumber, userAnimalEnergy, userNeededEnergy, userProcreationEnergy, userMinMutations, userMaxMutations, userGenotypeLen;
+    private TextField userHeight, userWidth, userPlantNumber, userPlantEnergy, userPlantPerDay, userAnimalNumber, userAnimalEnergy, userNeededEnergy, userProcreationEnergy, userMinMutations, userMaxMutations, userGenotypeLen, exportFileName;
 
     @FXML
     private RadioButton earth, infernalPortal, fullRandomness, slightCorrection, equator, toxicCorpses, fullPredestination, someMadness;
 
     @FXML
-    private Button start, stop, exConfig1, exConfig2;
+    private Button start, exConfig1, exConfig2, exportToCsv;
 
 
     public void addConfigFromUser() {
@@ -69,7 +69,6 @@ public class FormController {
         }
         for (int i = 0; i < buttons.size() - 1; i += 2) {
             String button = getFromToggleGroup(buttons.get(i), buttons.get(i + 1));
-//            System.out.println(button);
             if (button.equals("")) {
                 throw new IllegalArgumentException("Z każej pary chociaż jeden przycisk musi być zaznaczony!");
             }
@@ -94,16 +93,12 @@ public class FormController {
     public SimulationParameters getUserConfig() {
         addConfigFromUser();
         validatedConfig = validation(textToValidation, buttonsToValidation);
-        System.out.println(validatedConfig);
-//        SimulationParameters p = new SimulationParameters();
         return writeAndGet(validatedConfig, "userconfig.csv");
-//        return p;
     }
 
     public void displayExampleConfig(SimulationParameters configs) {
         Hashtable<String, String> configTab = new Hashtable<String, String>();
         configTab = configs.configsInTab();
-        System.out.println(configTab);
         userHeight.setText(configTab.get("mapHeight"));
         userWidth.setText(configTab.get("mapWidth"));
         userPlantNumber.setText(configTab.get("initialPlantNum"));
@@ -143,16 +138,19 @@ public class FormController {
         return start;
     }
 
-    public Button getStopButton() {
-        return stop;
-    }
-
     public Button getExConfig1Btn() {
         return exConfig1;
     }
 
     public Button getExConfig2Btn() {
         return exConfig2;
+    }
+
+    public Button getExportToCsvBtn() {
+        return exportToCsv;
+    }
+    public String getExportFileName() {
+        return exportFileName.getText();
     }
 
 }

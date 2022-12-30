@@ -63,7 +63,6 @@ public class FormController {
             if (input.equals("")) {
                 throw new IllegalArgumentException("Wszystkie pola muszą być wypełnione!");
             } else if (!input.matches("[0][.][1-9]+") && !input.matches("[0-9]+")) {
-                System.out.println(input);
                 throw new IllegalArgumentException("Tylko liczby lub ułamki!");
             }
             userConfig.add(input);
@@ -74,10 +73,6 @@ public class FormController {
                 throw new IllegalArgumentException("Z każej pary chociaż jeden przycisk musi być zaznaczony!");
             }
             userConfig.add(button);
-        }
-        System.out.println(userConfig);
-        for (int i=0; i < userConfig.size(); i++) {
-            System.out.println(userConfig.get(i));
         }
         return userConfig;
     }

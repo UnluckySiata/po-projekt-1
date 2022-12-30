@@ -12,6 +12,8 @@ public class SimulationEngine implements Runnable {
 
     private SimulationController app;
 
+    private  int refresh;
+
     public SimulationEngine(AbstractWorldMap map, SimulationController app) {
         this.map = map;
         this.app = app;
@@ -75,7 +77,9 @@ public class SimulationEngine implements Runnable {
 
                 a.move();
                 try {
-                    Thread.sleep(500 / map.animals.size());
+                    int tmp = (500 / map.animals.size());
+                    refresh = Math.max(tmp, 10);
+                    Thread.sleep(refresh);
                     //Thread.sleep(100);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);

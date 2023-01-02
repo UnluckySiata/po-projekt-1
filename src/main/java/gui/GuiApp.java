@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class GuiApp extends Application{
-    private SimulationVisualisation simulationVisualisation = new SimulationVisualisation();
     private List<SimulationParameters> configs = ConfigurationParser.parse("config.csv");
     private boolean toExport = false;
 
@@ -29,7 +28,7 @@ public class GuiApp extends Application{
         formController.getStartButton().setOnAction(e -> {
             Stage stage = new Stage();
             try {
-                simulationVisualisation.init(stage, formController.getUserConfig(), toExport, exportFileName);
+                new SimulationVisualisation().init(stage, formController.getUserConfig(), toExport, exportFileName);
             } catch (Exception ex) {
                 throw new RuntimeException(ex);
             }

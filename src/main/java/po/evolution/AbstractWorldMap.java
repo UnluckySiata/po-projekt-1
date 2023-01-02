@@ -17,7 +17,7 @@ public abstract class AbstractWorldMap {
     protected int[] animalsDied;
     protected boolean[] plantPresent;
     protected int plants = 0;
-    protected HashMap<Vector2d, LinkedList<Animal>> fields = new HashMap<>();
+    private HashMap<Vector2d, LinkedList<Animal>> fields = new HashMap<>();
     protected LinkedList<Animal> animals = new LinkedList<>();
     protected LinkedHashSet<Vector2d> occupiedPositions = new LinkedHashSet<>(); // Przez zwierzęta
     protected int animalsNum, freeFields; // Wolne od zwierząt i roślin
@@ -368,5 +368,9 @@ public abstract class AbstractWorldMap {
 
     public int getHeight() {
         return height;
+    }
+
+    public Animal getAnimal(Vector2d pos) {
+        return fields.get(pos).get(0);
     }
 }

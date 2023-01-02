@@ -1,13 +1,17 @@
 package gui;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class GuiElementBox {
 
-    VBox vbox = new VBox(0);
+    VBox vbox = new VBox(10);
+    StackPane animalCell;
+    StackPane grassCell;
 
     //konstruktor dla zwierza
 
@@ -23,8 +27,10 @@ public class GuiElementBox {
         } else {
             anim.setFill(Color.valueOf("Grey"));
         }
-        vbox.getChildren().addAll(anim);
-        vbox.setAlignment(Pos.CENTER);
+        animalCell = new StackPane();
+        animalCell.getChildren().addAll(anim);
+        animalCell.setAlignment(Pos.CENTER);
+
     }
 
     //konstruktor dla trawy

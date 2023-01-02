@@ -18,7 +18,7 @@ public class GuiApp extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         FXMLLoader root = new FXMLLoader(getClass().getResource("/forms.fxml"));
-        Scene scene = new Scene(root.load(), 600, 853);
+        Scene scene = new Scene(root.load(), 620, 853);
 
         primaryStage.setTitle("Anmial Simulation");
         primaryStage.setScene(scene);

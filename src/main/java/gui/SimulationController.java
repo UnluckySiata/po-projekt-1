@@ -1,31 +1,28 @@
 package gui;
 
 import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import po.evolution.AbstractWorldMap;
 import po.evolution.Animal;
-import po.evolution.SimulationEngine;
+import po.evolution.Vector2d;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.LinkedList;
 
-import static java.lang.Math.round;
 
 public class SimulationController {
 
     private AbstractWorldMap map;
-    private SimulationEngine engine;
     private GridPane grid = new GridPane();
-    private SimulationController simulationController;
     private int fieldsNumX;
     private int fieldsNumY;
     private int mapBoxWidth = 540;
@@ -34,6 +31,7 @@ public class SimulationController {
     private double imgWidht;
     private double imgHeight;
     private int startEnergy;
+    private Animal clickedAnimal = null;
     @FXML
     private AnchorPane simulationBox, mapBox, statisticsBox;
 
@@ -41,7 +39,8 @@ public class SimulationController {
     private Button stopSim, endSimulationBtn;
 
     @FXML
-    private Text animalsNum, plantsNum, emptyNum, dominantGenotype, avgAnimalEnergy, avgAnimalLifetime;
+    private Text animalsNum, plantsNum, emptyNum, dominantGenotype, avgAnimalEnergy, avgAnimalLifetime,
+            animalEnergy, plantsEaten, animalChildren, animalLifetime, animalGenotype, animalDeathDay;
 
     public void setMap(AbstractWorldMap map, int startingEnergy) {
         this.map = map;
@@ -77,15 +76,16 @@ public class SimulationController {
             }
         }
 
-        addElements(); //to wyjątek rzuca zrób try catcha
+        addElements();
         showStats();
         mapBox.getChildren().add(grid);
         grid.setGridLinesVisible(true);
     }
 
     public void refreshGrid() throws FileNotFoundException {
-        addElements(); //to wyjątek rzuca zrób try catcha
+        addElements();
         showStats();
+
         mapBox.getChildren().add(grid);
         grid.setGridLinesVisible(true);
     }
@@ -102,7 +102,12 @@ public class SimulationController {
             GuiElementBox animal = new GuiElementBox(startEnergy, animalOnField.getEnergy(),this.imgWidht, this.imgWidht);
             x = animalOnField.getPosition().x;
             y = animalOnField.getPosition().y;
-            grid.add(animal.vbox, x, y);
+            animal.animalCell.setOnMouseClicked(e -> {
+                this.clickedAnimal = animalOnField;
+                this.showAnimalStats();
+            });
+
+            grid.add(animal.animalCell, x, y);
         }
         x = 0;
         y = 0;
@@ -122,6 +127,15 @@ public class SimulationController {
         }
     }
 
+    public void showAnimalStats() {
+        animalEnergy.setText(String.valueOf(this.clickedAnimal.getEnergy()));
+        plantsEaten.setText(String.valueOf(this.clickedAnimal.getPlantsEaten()));
+        animalChildren.setText(String.valueOf(this.clickedAnimal.getChildrenNumber()));
+        animalLifetime.setText(String.valueOf(this.clickedAnimal.getLifetime()));
+        animalGenotype.setText(String.valueOf(this.clickedAnimal.getGenotype()));
+        animalDeathDay.setText(String.valueOf(this.clickedAnimal.getDeathDay()));
+
+    }
     public void calculateImgDim() {
         this.imgHeight = this.fieldDim - this.fieldDim/5;
         this.imgWidht = this.fieldDim - this.fieldDim/5;
@@ -134,6 +148,9 @@ public class SimulationController {
         dominantGenotype.setText(Arrays.toString(map.stats.getDominantGenotype()));
         avgAnimalEnergy.setText(Double.toString(Math.round(map.stats.getAverageEnergy())));
         avgAnimalLifetime.setText(Double.toString(Math.round(map.stats.getAverageLifetime())));
+        if (this.clickedAnimal != null) {
+            this.showAnimalStats();
+        }
     }
 
     public void refreshMap() {

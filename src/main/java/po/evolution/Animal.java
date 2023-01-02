@@ -210,8 +210,5 @@ public class Animal {
         if (alive) return 0;
         return lastDay;
     }
-    public Image getImage() throws FileNotFoundException {
-        return new Image(new FileInputStream("src/main/resources/animal.png"));
-    }
 
 }

@@ -167,6 +167,7 @@ public class Animal {
 
     public void eat() {
         energy += params.energyFromPlant;
+        ++plantsEaten;
     }
 
     // getters

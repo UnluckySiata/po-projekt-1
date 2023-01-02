@@ -3,6 +3,7 @@ package po.evolution;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.Arrays;
 
 import com.opencsv.CSVWriter;
@@ -10,7 +11,8 @@ import com.opencsv.CSVWriter;
 public class Statistics {
     private int animalsDied = 0, animals = 0, plants = 0, free = 0;
     private double averageLifetime = 0.0, averageEnergy = 0.0;
-    private int[] genotype = new int[0];
+    private List<Integer> genotype;
+    private int[] genotypeArray = new int[0];
 
     public Statistics(int animals, int free, double averageEnergy) {
         this.animals = animals;
@@ -54,7 +56,7 @@ public class Statistics {
                 String.valueOf(animals),
                 String.valueOf(plants),
                 String.valueOf(free),
-                Arrays.toString(genotype),
+                Arrays.toString(genotypeArray),
                 String.valueOf(averageEnergy),
                 String.valueOf(averageLifetime)
             };
@@ -99,8 +101,11 @@ public class Statistics {
 
     }
 
-    void acquireDominantGenotype(int[] genotype) {
+    void acquireDominantGenotype(List<Integer> genotype) {
         this.genotype = genotype;
+        genotypeArray = genotype.stream()
+            .mapToInt(Integer::intValue)
+            .toArray();
     }
 
     void updateFree(int newFree) { free = newFree; }
@@ -110,7 +115,7 @@ public class Statistics {
     public int getPlantNum() { return plants; }
     public int getFree() { return free; }
 
-    public int[] getDominantGenotype() { return genotype; }
+    public int[] getDominantGenotype() { return genotypeArray; }
 
     public double getAverageLifetime() { return averageLifetime; }
     public double getAverageEnergy() { return averageEnergy; }

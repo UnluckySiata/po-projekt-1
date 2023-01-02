@@ -1,9 +1,7 @@
 package po.evolution;
 
-import gui.FormController;
 import gui.GuiApp;
 import javafx.application.Application;
-import java.util.List;
 
 public class App {
 

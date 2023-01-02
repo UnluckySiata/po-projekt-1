@@ -21,9 +21,9 @@ public abstract class AbstractWorldMap {
     protected LinkedList<Animal> animals = new LinkedList<>();
     protected LinkedHashSet<Vector2d> occupiedPositions = new LinkedHashSet<>(); // Przez zwierzęta
     protected int animalsNum, freeFields; // Wolne od zwierząt i roślin
-    protected HashMap<int[], Integer> genotypes = new HashMap<>();
+    protected HashMap<List<Integer>, Integer> genotypes = new HashMap<>();
     protected int currGenotypeMax = 0;
-    protected int[] domimantGenotype = new int[0];
+    protected List<Integer> domimantGenotype = new LinkedList<>();
     public Statistics stats;
 
     public AbstractWorldMap(SimulationParameters params) {
@@ -91,12 +91,12 @@ public abstract class AbstractWorldMap {
         stats.onAnimalDeath(a.getLifetime());
     }
 
-    int[] calculateDominantGenotype() {
-        for (Map.Entry<int[], Integer> entry : genotypes.entrySet()) {
+    List<Integer> calculateDominantGenotype() {
+        for (Map.Entry<List<Integer>, Integer> entry : genotypes.entrySet()) {
             if (entry.getValue() == currGenotypeMax) return entry.getKey();
         }
 
-        return new int[0]; //unreachable
+        return new LinkedList<>(); //unreachable
 
     }
 
@@ -106,13 +106,21 @@ public abstract class AbstractWorldMap {
         switch (params.plantGrowthVariant) {
             case TOXIC_CORPSES:
                 int quantity = (int) (0.2 * n);
-                List<Integer> perm = IntStream.range(0, n)
+                List<Integer> considered = IntStream.range(0, n)
                     .boxed()
                     .sorted((i, j) -> animalsDied[i] > animalsDied[j] ? 1
                         : animalsDied[i] == animalsDied[j] ? 0 : -1)
                     .toList();
 
-                result = perm.stream().limit(quantity).mapToInt(Integer::intValue).toArray();
+                List<Integer> perm = new Random().ints(quantity, 0, considered.size())
+                    .boxed()
+                    .toList();
+
+                result = perm.stream()
+                    .map(x -> considered.get(x))
+                    .mapToInt(Integer::intValue)
+                    .toArray();
+
                 break;
 
             case EQUATOR:
@@ -208,7 +216,7 @@ public abstract class AbstractWorldMap {
             animalsOnField.add(a);
             animals.push(a);
 
-            int[] genotype = a.getGenotype();
+            List<Integer> genotype = a.getGenotype();
             if (genotypes.containsKey(genotype)) {
                 Integer val = genotypes.get(genotype) + 1;
                 genotypes.remove(genotype);
@@ -243,7 +251,7 @@ public abstract class AbstractWorldMap {
             ++animalsNum;
             stats.onProcreation();
 
-            int[] genotype = child.getGenotype();
+            List<Integer> genotype = child.getGenotype();
             if (genotypes.containsKey(genotype)) {
                 Integer val = genotypes.get(genotype) + 1;
                 genotypes.remove(genotype);

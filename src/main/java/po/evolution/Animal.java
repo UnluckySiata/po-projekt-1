@@ -4,6 +4,8 @@ import javafx.scene.image.Image;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
 public class Animal {
@@ -145,7 +147,7 @@ public class Animal {
                 currGene = (currGene + 1) % n;
                 break;
             case SOME_MADNESS:
-                if (Math.random() < 0.8) {
+                if (Math.random() < 0.8 || n == 1) {
                     currGene = (currGene + 1) % n;
                 } else {
                     Random r = new Random();
@@ -168,8 +170,8 @@ public class Animal {
     }
 
     // getters
-    public int[] getGenotype() {
-        return genotype;
+    public List<Integer> getGenotype() {
+        return Arrays.stream(genotype).boxed().toList();
     }
 
     public Vector2d getPosition() {

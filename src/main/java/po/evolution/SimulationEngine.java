@@ -80,7 +80,6 @@ public class SimulationEngine implements Runnable {
                     int tmp = (500 / map.animals.size());
                     refresh = Math.max(tmp, 10);
                     Thread.sleep(refresh);
-                    //Thread.sleep(100);
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }

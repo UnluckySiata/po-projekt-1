@@ -96,21 +96,6 @@ public class SimulationController {
         int x;
         int y;
 
-        LinkedList<Animal> animalsFields = map.getAnimals();
-        for (int i = 0; i < animalsFields.size(); i++) {
-            Animal animalOnField = animalsFields.get(i);
-            GuiElementBox animal = new GuiElementBox(startEnergy, animalOnField.getEnergy(),this.imgWidht, this.imgWidht);
-            x = animalOnField.getPosition().x;
-            y = animalOnField.getPosition().y;
-            animal.animalCell.setOnMouseClicked(e -> {
-                this.clickedAnimal = animalOnField;
-                this.showAnimalStats();
-            });
-
-            grid.add(animal.animalCell, x, y);
-        }
-        x = 0;
-        y = 0;
         boolean[] grassFields = map.getPlants();
         for (int i = 0; i < grassFields.length; i++) {
             x = i % this.fieldsNumX;
@@ -124,6 +109,21 @@ public class SimulationController {
                 GridPane.setHalignment(label, HPos.CENTER);
                 grid.add(label, x, y);
             }
+        }
+        x = 0;
+        y = 0;
+        LinkedList<Animal> animalsFields = map.getAnimals();
+        for (int i = 0; i < animalsFields.size(); i++) {
+            Animal animalOnField = animalsFields.get(i);
+            GuiElementBox animal = new GuiElementBox(startEnergy, animalOnField.getEnergy(),this.imgWidht, this.imgWidht);
+            x = animalOnField.getPosition().x;
+            y = animalOnField.getPosition().y;
+            animal.animalCell.setOnMouseClicked(e -> {
+                this.clickedAnimal = animalOnField;
+                this.showAnimalStats();
+            });
+
+            grid.add(animal.animalCell, x, y);
         }
     }
 

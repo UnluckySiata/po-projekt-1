@@ -4,10 +4,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="simulationBox" prefHeight="550.0" prefWidth="865.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SimulationController">
+<AnchorPane fx:id="simulationBox" prefHeight="550.0" prefWidth="938.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.SimulationController">
    <children>
-      <AnchorPane fx:id="mapBox" layoutX="6.0" layoutY="7.0" maxHeight="540.0" maxWidth="540.0" minHeight="540.0" minWidth="540.0" prefHeight="540.0" prefWidth="540.0" style="-fx-background-color: lime;" />
-      <AnchorPane fx:id="statisticsBox" layoutX="567.0" layoutY="10.0" prefHeight="540.0" prefWidth="348.0">
+      <AnchorPane fx:id="mapBox" layoutX="391.0" layoutY="7.0" maxHeight="540.0" maxWidth="540.0" minHeight="540.0" minWidth="540.0" prefHeight="540.0" prefWidth="540.0" style="-fx-background-color: lime;" />
+      <AnchorPane fx:id="statisticsBox" layoutX="14.0" prefHeight="540.0" prefWidth="348.0">
          <children>
             <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość zwierząt na mapie: " />
             <Text layoutX="14.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ilość roślin na mapie: " />

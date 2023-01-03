@@ -25,8 +25,8 @@ public class SimulationController {
     private GridPane grid = new GridPane();
     private int fieldsNumX;
     private int fieldsNumY;
-    private int mapBoxWidth = 540;
-    private int mapBoxHeight = 540;
+    private double mapBoxWidth = 540;
+    private double mapBoxHeight = 540;
     private double fieldDim;
     private double imgWidht;
     private double imgHeight;
@@ -47,18 +47,21 @@ public class SimulationController {
         this.startEnergy = startingEnergy;
     }
     public void drawGrid(){
+        grid.setMinWidth(540);
+        grid.setMinHeight(540);
         this.fieldsNumY = map.getHeight();
         this.fieldsNumX = map.getWidth();
 
         int col = 0, row = 0, maxC = this.fieldsNumY, maxR = this.fieldsNumX;
         if (this.fieldsNumY > this.fieldsNumX) {
-            this.fieldDim = (mapBoxHeight/this.fieldsNumY);
+            this.fieldDim = (mapBoxHeight/this.fieldsNumX);
         } else {
             this.fieldDim = (mapBoxWidth/this.fieldsNumX);
         }
 
         ColumnConstraints colC = new ColumnConstraints(mapBoxWidth / fieldsNumX);
         RowConstraints rowC = new RowConstraints(mapBoxHeight / fieldsNumY);
+        System.out.println(mapBoxHeight / fieldsNumY);
 
         for (int i = 0; i < this.fieldsNumX; i+=1) {
             grid.getColumnConstraints().add(colC);
@@ -75,11 +78,12 @@ public class SimulationController {
                 grid.add(label, i, j);
             }
         }
+        grid.setStyle("-fx-background-color: lightgreen");
 
         addElements();
         showStats();
         mapBox.getChildren().add(grid);
-        grid.setGridLinesVisible(true);
+//        grid.setGridLinesVisible(true);
     }
 
     public void refreshGrid() throws FileNotFoundException {
@@ -87,7 +91,7 @@ public class SimulationController {
         showStats();
 
         mapBox.getChildren().add(grid);
-        grid.setGridLinesVisible(true);
+//        grid.setGridLinesVisible(true);
     }
 
 
@@ -102,7 +106,7 @@ public class SimulationController {
             y = i / this.fieldsNumX;
             if (grassFields[i] && !map.isOccupied(x, y)) {
                 GuiElementBox grass = new GuiElementBox(this.imgWidht, this.imgWidht);
-                grid.add(grass.vbox, x, y);
+                grid.add(grass.grassCell, x, y);
             }
             else {
                 Label label = new Label(" ");

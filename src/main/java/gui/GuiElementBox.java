@@ -38,8 +38,11 @@ public class GuiElementBox {
         Circle grass = new Circle();
         grass.setRadius(width/2);
         grass.setFill(Color.valueOf("Green"));
-        vbox.getChildren().addAll(grass);
-        vbox.setAlignment(Pos.CENTER);
+        grassCell = new StackPane();
+        grassCell.getChildren().addAll(grass);
+        grassCell.setAlignment(Pos.CENTER);
+//        vbox.getChildren().addAll(grass);
+//        vbox.setAlignment(Pos.CENTER);
     }
 
 }

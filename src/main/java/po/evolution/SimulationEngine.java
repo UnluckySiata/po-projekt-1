@@ -71,35 +71,40 @@ public class SimulationEngine implements Runnable {
             }
             if (suspended) waitForResume();
             map.clearDead();
-            app.refreshMap();
+//            app.refreshMap();
 
             for (Animal a : map.animals) {
 
                 a.move();
-                try {
-                    int tmp = (500 / map.animals.size());
-                    refresh = Math.max(tmp, 10);
-                    Thread.sleep(refresh);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
-                }
+//                try {
+//                    int tmp = (500 / map.animals.size());
+//                    refresh = Math.max(tmp, 10);
+//                    Thread.sleep();
+//                } catch (InterruptedException e) {
+//                    throw new RuntimeException(e);
+//                }
                 map.calculateFree();
-                app.refreshMap();
+//                app.refreshMap();
             }
 
             for (Vector2d pos : map.occupiedPositions) {
                 map.feast(pos);
             }
-            app.refreshMap();
+//            app.refreshMap();
 
             for (Vector2d pos : map.occupiedPositions) {
                 map.procreate(pos);
             }
-            app.refreshMap();
+//            app.refreshMap();
 
             map.spawnPlants(map.params.plantsPerDay);
             map.calculateFree();
             app.refreshMap();
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
             if (exportStats) {
                 map.stats.writeToCSV(statsFileName);

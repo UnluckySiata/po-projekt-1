@@ -41,8 +41,6 @@ public class GuiElementBox {
         grassCell = new StackPane();
         grassCell.getChildren().addAll(grass);
         grassCell.setAlignment(Pos.CENTER);
-//        vbox.getChildren().addAll(grass);
-//        vbox.setAlignment(Pos.CENTER);
     }
 
 }

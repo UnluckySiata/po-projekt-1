@@ -19,17 +19,15 @@ public class SimulationVisualisation extends Application{
 
     private boolean isPaused = false;
     public void init(Stage primaryStage, SimulationParameters userConfig, boolean toExport, String exportFileName) throws Exception {
-//        map = earth == WorldVariant.EARTH ? new Earth(configs.get(0)) : new InfernalPortal(configs.get(0));
         map = earth == WorldVariant.EARTH ? new Earth(userConfig) : new InfernalPortal(userConfig);
 
         FXMLLoader root = new FXMLLoader(getClass().getResource("/Simulation.fxml"));
-        Scene scene = new Scene(root.load(), 950, 700);
+        Scene scene = new Scene(root.load(), 1000, 700);
 
         primaryStage.setTitle("Symulacja i statystyki");
         primaryStage.setScene(scene);
         SimulationController simulationController = root.getController();
         this.simulationController = simulationController;
-//        simulationController.setMap(map, 20);
         if (toExport) {
             simulationEngine = new SimulationEngine(this.map, this.simulationController, exportFileName);
         } else {

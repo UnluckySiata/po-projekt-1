@@ -1,18 +1,14 @@
 package gui;
 
 import javafx.application.Platform;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.geometry.HPos;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import po.evolution.AbstractWorldMap;
 import po.evolution.Animal;
-import po.evolution.Vector2d;
 
 import java.io.FileNotFoundException;
 import java.util.Arrays;
@@ -83,7 +79,6 @@ public class SimulationController {
         addElements();
         showStats();
         mapBox.getChildren().add(grid);
-//        grid.setGridLinesVisible(true);
     }
 
     public void refreshGrid() throws FileNotFoundException {
@@ -91,7 +86,6 @@ public class SimulationController {
         showStats();
 
         mapBox.getChildren().add(grid);
-//        grid.setGridLinesVisible(true);
     }
 
 
